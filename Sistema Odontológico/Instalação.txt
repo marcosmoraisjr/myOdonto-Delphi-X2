@@ -1,0 +1,5 @@
+1 - Instale o arquivo: "C:\Projetos\Odontológico\Instalador e Update\Output\SetupOdontosis_1010.exe".
+2 - Instale o Delphi XE2.
+3 - Instale os Componentes da pasta: "C:\Projetos\Odontológico\Componentes".
+4 - Execute "C:\Odontosis\Odontosis.exe" para anexar o banco de dados.
+5 - Só compilar o sistema na pasta "C:\Projetos\Odontológico\Fontes".

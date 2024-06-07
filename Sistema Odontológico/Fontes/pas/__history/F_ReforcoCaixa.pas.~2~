@@ -1,0 +1,44 @@
+unit F_ReforcoCaixa;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Funcoes, Vcl.Dialogs, Padrao, Data.DB,
+  Data.Win.ADODB, JvComponentBase, JvEnterTab, Vcl.ComCtrls, Vcl.ExtCtrls,
+  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer,
+  cxEdit, dxSkinsCore, dxSkinsDefaultPainters, Vcl.Buttons, cxTextEdit,
+  cxCurrencyEdit, Vcl.StdCtrls;
+
+type
+  TfrmReforcoCaixa = class(TfrmPadrao)
+    qryAux: TADOQuery;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    cbMoeda: TComboBox;
+    Label2: TLabel;
+    EdtValor: TcxCurrencyEdit;
+    btnFechar: TSpeedButton;
+    btnSalvar: TSpeedButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmReforcoCaixa: TfrmReforcoCaixa;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmReforcoCaixa.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  EdtValor.Value := 0;
+  EdtValor.SetFocus;
+end;
+
+end.

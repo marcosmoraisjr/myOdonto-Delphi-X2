@@ -1,0 +1,35 @@
+unit E_FotoPaciente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Funcoes, Padrao, cxGraphics,
+  cxLookAndFeels, cxLookAndFeelPainters, Menus, dxSkinsCore,
+  dxSkinsDefaultPainters, Vcl.Mask, JvExMask, JvToolEdit, Vcl.StdCtrls,
+  cxButtons, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, JvComponentBase,
+  JvEnterTab, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmEditarFotoPaciente = class(TfrmPadrao)
+    GroupBox1: TGroupBox;
+    btnFechar: TcxButton;
+    btnSalvar: TcxButton;
+    Label1: TLabel;
+    EdtDescricao: TEdit;
+    Label2: TLabel;
+    EdtDtNasc: TJvDateEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmEditarFotoPaciente: TfrmEditarFotoPaciente;
+
+implementation
+
+{$R *.dfm}
+
+end.

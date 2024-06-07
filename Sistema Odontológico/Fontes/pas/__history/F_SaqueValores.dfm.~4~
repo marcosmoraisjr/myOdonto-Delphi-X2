@@ -1,0 +1,143 @@
+inherited frmSaqueValores: TfrmSaqueValores
+  ClientHeight = 289
+  ClientWidth = 394
+  OnCreate = FormCreate
+  ExplicitWidth = 400
+  ExplicitHeight = 313
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 394
+    Caption = 'Saque de Valores'
+    ExplicitWidth = 394
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 265
+    Width = 394
+    ExplicitTop = 265
+    ExplicitWidth = 394
+  end
+  object GroupBox1: TGroupBox [2]
+    Left = 0
+    Top = 33
+    Width = 394
+    Height = 168
+    Align = alTop
+    TabOrder = 2
+    object gridPagamento: TJvDBUltimGrid
+      Left = 2
+      Top = 15
+      Width = 390
+      Height = 151
+      Align = alClient
+      DataSource = dsValores
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      AutoAppend = False
+      AutoSort = False
+      BeepOnError = False
+      SelectColumnsDialogStrings.Caption = 'Select columns'
+      SelectColumnsDialogStrings.OK = '&OK'
+      SelectColumnsDialogStrings.NoSelectionWarning = 'At least one column must be visible!'
+      CanDelete = False
+      EditControls = <>
+      AutoSizeRows = False
+      RowsHeight = 17
+      TitleRowHeight = 17
+      Columns = <
+        item
+          Color = clGradientInactiveCaption
+          Expanded = False
+          FieldName = 'Descricao'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ReadOnly = True
+          Width = 143
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Valor'
+          Visible = True
+        end
+        item
+          Color = clGradientInactiveCaption
+          Expanded = False
+          FieldName = 'ValorCaixa'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ReadOnly = True
+          Title.Caption = 'Valor Caixa'
+          Visible = True
+        end
+        item
+          Color = clGradientInactiveCaption
+          Expanded = False
+          FieldName = 'ValorDiferenca'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ReadOnly = True
+          Title.Caption = 'Valor Diferen'#231'a'
+          Visible = True
+        end>
+    end
+  end
+  inherited Enter: TJvEnterAsTab
+    Left = 40
+    Top = 0
+  end
+  object qryAux: TADOQuery
+    Connection = DM.Conexao
+    Parameters = <>
+    Left = 56
+    Top = 65520
+  end
+  object qryValores: TADOQuery
+    ConnectionString = 
+      'Provider=MSDataShape.1;Persist Security Info=True;Data Source='#39#39 +
+      ';Data Provider=NONE'
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SHAPE APPEND'
+      'NEW AdVarChar(60) Descricao,'
+      'NEW AdDouble Valor,'
+      'NEW AdDouble ValorCaixa,'
+      'NEW AdDouble ValorDiferenca'
+      '')
+    Left = 295
+    object qryValoresDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 60
+    end
+    object qryValoresValor: TFloatField
+      FieldName = 'Valor'
+      DisplayFormat = '#,##0.00'
+    end
+    object qryValoresValorCaixa: TFloatField
+      FieldName = 'ValorCaixa'
+      DisplayFormat = '#,##0.00'
+    end
+    object qryValoresValorDiferenca: TFloatField
+      FieldName = 'ValorDiferenca'
+      DisplayFormat = '#,##0.00'
+    end
+  end
+  object dsValores: TDataSource
+    DataSet = qryValores
+    Left = 352
+  end
+end

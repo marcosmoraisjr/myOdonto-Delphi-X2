@@ -1,0 +1,37 @@
+unit F_HistoricoCheques;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, cxGraphics, cxLookAndFeels,
+  cxLookAndFeelPainters, Menus, dxSkinsCore, dxSkinsDefaultPainters,
+  Vcl.StdCtrls, cxButtons, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
+  JvComponentBase, JvEnterTab, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.Grids,
+  Vcl.DBGrids, JvExDBGrids, JvDBGrid, JvDBUltimGrid;
+
+type
+  TfrmHistoricoCheque = class(TfrmPadrao)
+    btnFechar: TcxButton;
+    gridPagamento: TJvDBUltimGrid;
+    procedure btnFecharClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmHistoricoCheque: TfrmHistoricoCheque;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmHistoricoCheque.btnFecharClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+end.

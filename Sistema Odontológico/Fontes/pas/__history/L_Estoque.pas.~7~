@@ -1,0 +1,70 @@
+unit L_Estoque;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ListaPadrao, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
+  dxSkinsDefaultPainters, Menus, Data.DB, Data.Win.ADODB,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, JvComponentBase, JvEnterTab,
+  Vcl.StdCtrls, cxButtons, cxCheckBox, JvExStdCtrls, JvEdit, JvDBSearchEdit,
+  Vcl.Buttons, Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.ComCtrls, Funcoes,
+  Vcl.ExtCtrls;
+
+type
+  TfrmListaEstoque = class(TfrmListaPadrao)
+    cxButton1: TcxButton;
+    qryPadraoID_MATERIAIS: TAutoIncField;
+    qryPadraoGrupo: TStringField;
+    qryPadraoQTDE: TFloatField;
+    qryPadraoQTDEMIN: TFloatField;
+    qryPadraoDESCRICAO: TStringField;
+    qryPadraoUNIDADE: TStringField;
+    qryPadraoREFERENCIA: TStringField;
+    procedure btnAdicionarClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    Procedure FiltraPorClick(sOrderBy : String);
+  end;
+
+var
+  frmListaEstoque: TfrmListaEstoque;
+
+implementation
+
+{$R *.dfm}
+
+uses C_Estoque;
+
+procedure TfrmListaEstoque.btnAdicionarClick(Sender: TObject);
+begin
+  inherited;
+  AbreForm(TfrmCMateriais, frmCMateriais);
+end;
+
+procedure TfrmListaEstoque.FiltraPorClick(sOrderBy: String);
+begin
+  With qryPadrao do
+    Begin
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT MATERIAIS.ID_MATERIAIS, GRUPO.DESCRICAO AS Grupo, MATERIAIS.QTDE, MATERIAIS.QTDEMIN, MATERIAIS.DESCRICAO,');
+      SQL.Add('MATERIAIS.UNIDADE, MATERIAIS.REFERENCIA FROM MATERIAIS');
+      SQL.Add('INNER JOIN GRUPO ON MATERIAIS.ID_GRUPO = GRUPO.ID_GRUPO');
+      SQL.Add(sOrderBy);
+      Open;
+    End;
+end;
+
+procedure TfrmListaEstoque.FormActivate(Sender: TObject);
+begin
+  EdtPesquisa.DataField := 'DESCRICAO';
+  FiltraPorClick('Order By MATERIAIS.ID_MATERIAIS, MATERIAIS.DESCRICAO');
+
+end;
+
+end.

@@ -1,0 +1,42 @@
+unit P_Grupos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, P_Padrao, cxGraphics, cxLookAndFeels,
+  cxLookAndFeelPainters, Menus, dxSkinsCore, dxSkinsDefaultPainters,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, JvComponentBase, JvEnterTab,
+  Data.DB, Data.Win.ADODB, Vcl.StdCtrls, cxButtons, JvExStdCtrls, JvEdit,
+  JvDBSearchEdit, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Funcoes,
+  JvExDBGrids, JvDBGrid;
+
+type
+  TfrmPGrupos = class(TfrmPesquisaPadrao)
+    qryPesquisaID_GRUPO: TAutoIncField;
+    qryPesquisaDESCRICAO: TStringField;
+    procedure btnAdicionarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPGrupos: TfrmPGrupos;
+
+implementation
+
+{$R *.dfm}
+
+uses C_Grupos;
+
+procedure TfrmPGrupos.btnAdicionarClick(Sender: TObject);
+begin
+  inherited;
+  AbreForm(TfrmCadGrupos, frmCadGrupos);
+  qryPesquisa.Close;
+  qryPesquisa.Open;
+end;
+
+end.

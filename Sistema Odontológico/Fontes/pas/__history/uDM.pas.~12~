@@ -1,0 +1,54 @@
+unit uDM;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DB, Data.Win.ADODB;
+
+type
+  TDM = class(TDataModule)
+    Conexao: TADOConnection;
+    qryAux: TADOQuery;
+    qryAux2: TADOQuery;
+    ImagemPaciente: TADOConnection;
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    Procedure CBancoImagensPacientes;
+    Procedure DBancoImagensPacientes;
+  end;
+
+var
+  DM: TDM;
+
+implementation
+
+{%CLASSGROUP 'System.Classes.TPersistent'}
+
+{$R *.dfm}
+
+procedure TDM.CBancoImagensPacientes;
+begin
+  ImagemPaciente.Open;
+  ImagemPaciente.ConnectionString := '';
+  ImagemPaciente.Connected := True;
+end;
+
+procedure TDM.DataModuleCreate(Sender: TObject);
+begin
+  Conexao.Connected := False;
+  Conexao.ConnectionString := '';
+  Conexao.Close;
+
+  DBancoImagensPacientes;
+end;
+
+procedure TDM.DBancoImagensPacientes;
+begin
+  ImagemPaciente.Connected := False;
+  ImagemPaciente.ConnectionString := '';
+  ImagemPaciente.Close;
+end;
+
+end.

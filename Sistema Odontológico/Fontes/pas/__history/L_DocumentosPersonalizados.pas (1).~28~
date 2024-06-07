@@ -1,0 +1,142 @@
+unit L_DocumentosPersonalizados;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ListaPadrao, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
+  dxSkinsDefaultPainters, Data.DB, Data.Win.ADODB, JvComponentBase, JvEnterTab,
+  cxCheckBox, JvExStdCtrls, JvEdit, JvDBSearchEdit, Vcl.StdCtrls, Vcl.Grids,
+  Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.Buttons, Funcoes;
+
+type
+  TfrmListaDocumentosPersonalizados = class(TfrmListaPadrao)
+    qryPadraoID_DOCSPERSONALIZADOS: TAutoIncField;
+    qryPadraoDESCRICAO: TStringField;
+    qryPadraoPASTA: TStringField;
+    Timer1: TTimer;
+    qryConsulta: TADOQuery;
+    qryConsultaID: TIntegerField;
+    qryConsultaDescricao: TStringField;
+    qryConsultaPaciente: TBooleanField;
+    qryConsultaDentista: TBooleanField;
+    qryConsultaConsultorio: TBooleanField;
+    qryConsultaPasta: TStringField;
+    mmoEnvia: TMemo;
+    ConexaoWord: TADOConnection;
+    procedure FormActivate(Sender: TObject);
+    procedure btnAdicionarClick(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+    Procedure MontaDocumentos;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmListaDocumentosPersonalizados: TfrmListaDocumentosPersonalizados;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmListaDocumentosPersonalizados.btnAdicionarClick(Sender: TObject);
+begin
+  inherited;
+
+  if not Operador.DocPersonalizadoC then
+  Begin
+    application.MessageBox
+      ('Operador não tem permissão para cadastrar um documento personalizado!',
+      'Acesso Negado', mb_ok + MB_ICONWARNING);
+    Exit;
+  End;
+
+  WinExec('C:\Odontosis\OdsPad.exe ZAK321', SW_SHOWNORMAL);
+end;
+
+procedure TfrmListaDocumentosPersonalizados.btnEditarClick(Sender: TObject);
+begin
+  inherited;
+  if qryConsultaID.AsString <> '' then
+    Begin
+      if not Operador.DocPersonalizadoE then
+      Begin
+        application.MessageBox
+          ('Operador não tem permissão para editar um documento personalizado!',
+          'Acesso Negado', mb_ok + MB_ICONWARNING);
+        Exit;
+      End;
+
+      mmoEnvia.Lines.Text := qryConsultaID.AsString;
+      mmoEnvia.Lines.SaveToFile('C:\Odontosis\ID.txt');
+      WinExec('C:\Odontosis\OdsPad.exe ZAK321', SW_SHOWNORMAL);
+    End;
+end;
+
+procedure TfrmListaDocumentosPersonalizados.FormActivate(Sender: TObject);
+begin
+  MontaDocumentos;
+end;
+
+procedure TfrmListaDocumentosPersonalizados.FormCreate(Sender: TObject);
+var
+  sConect : String;
+begin
+  inherited;
+    sConect := '';
+    sConect := sConect + ' Provider=SQLOLEDB.1; ';
+    sConect := sConect + ' Persist Security Info=True; ';
+    sConect := sConect + ' User ID=' + CfgAcesso.Usuario + '; ';
+    sConect := sConect + ' Password=' + CfgAcesso.Senha + '; ';
+    sConect := sConect + ' Initial Catalog=ODSWORD; ';
+    sConect := sConect + ' Data Source=' + CfgAcesso.Servidor;
+    ConexaoWord.ConnectionString := sConect;
+    ConexaoWord.Connected := True;
+end;
+
+procedure TfrmListaDocumentosPersonalizados.MontaDocumentos;
+begin
+  With qryAux do
+    Begin
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT * FROM DOCUMENTOS ORDER BY DESCRICAO');
+      Open;
+
+      qryConsulta.Close;
+      qryConsulta.Open;
+
+      while not eof do
+        Begin
+          qryConsulta.Append;
+          qryConsultaID.AsInteger := FieldByName('ID_DOCUMENTOS').AsInteger;
+          qryConsultaDescricao.AsString := FieldByName('DESCRICAO').AsString;
+          qryConsultaPaciente.AsBoolean := FieldByName('PACIENTE').AsBoolean;
+          qryConsultaDentista.AsBoolean := FieldByName('DENTISTA').AsBoolean;
+          qryConsultaConsultorio.AsBoolean := FieldBYName('CONSULTORIO').AsBoolean;
+          qryConsulta.Post;
+
+          Next;
+        End;
+
+      qryConsulta.First;
+
+    End;
+end;
+
+procedure TfrmListaDocumentosPersonalizados.Timer1Timer(Sender: TObject);
+begin
+  inherited;
+  if FileExists('C:\Odontosis\Fechou.ods') then
+    Begin
+      MontaDocumentos;
+      DeleteFile('C:\Odontosis\Fechou.ods');
+    End;
+end;
+
+end.

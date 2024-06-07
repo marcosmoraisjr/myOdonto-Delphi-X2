@@ -1,0 +1,38 @@
+unit F_Lembretes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, Vcl.StdCtrls, Vcl.Menus,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, JvComponentBase, JvEnterTab,
+  Vcl.ComCtrls, Vcl.ExtCtrls, cxGraphics, cxLookAndFeels, cxLookAndFeelPainters,
+  Menus, dxSkinsCore, dxSkinsDefaultPainters, cxButtons, Vcl.Mask, JvExMask,
+  JvToolEdit;
+
+type
+  TfrmLembretes = class(TfrmPadrao)
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    Label1: TLabel;
+    EdtTitulo: TEdit;
+    Label2: TLabel;
+    EdtDtNasc: TJvDateEdit;
+    GroupBox3: TGroupBox;
+    mmoMensagem: TMemo;
+    btnSalvar: TcxButton;
+    btnFechar: TcxButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmLembretes: TfrmLembretes;
+
+implementation
+
+{$R *.dfm}
+
+end.

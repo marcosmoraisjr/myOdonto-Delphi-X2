@@ -1,0 +1,171 @@
+unit L_Cidade;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, P_Padrao, JvAppHotKey, JvComponentBase,
+  JvEnterTab, Data.DB, Data.Win.ADODB, Vcl.StdCtrls, Vcl.Buttons, Vcl.ComCtrls,
+  Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid, Funcoes,
+  Vcl.Mask, Vcl.DBCtrls, JvExStdCtrls, JvEdit, JvDBSearchEdit, cxGraphics,
+  cxLookAndFeels, cxLookAndFeelPainters, Menus, dxSkinsCore,
+  dxSkinsDefaultPainters, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
+  cxButtons;
+
+type
+  TfrmListaCidade = class(TfrmPesquisaPadrao)
+    qryPesquisaID_CIDADE: TAutoIncField;
+    qryPesquisaNOME: TStringField;
+    qryPesquisaUF: TStringField;
+    qryPesquisaCODIBGE: TStringField;
+    Cod: TDBEdit;
+    qryAUx: TADOQuery;
+    AutoIncField1: TAutoIncField;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnFecharClick(Sender: TObject);
+    procedure gListaKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure gListaTitleBtnClick(Sender: TObject; ACol: Integer;
+      Field: TField);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+    Procedure FiltraPorClick(OrderBy: String);
+  public
+    { Public declarations }
+  end;
+
+var
+  frmListaCidade: TfrmListaCidade;
+
+implementation
+
+{$R *.dfm}
+
+uses C_Cidade, Main;
+
+procedure TfrmListaCidade.btnFecharClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TfrmListaCidade.FiltraPorClick(OrderBy: String);
+begin
+  With qryPesquisa do
+  Begin
+    Close;
+    SQL.Clear;
+    SQL.Add('SELECT ID_CIDADE, NOME, UF, CODIBGE FROM CIDADE');
+    SQL.Add(OrderBy);
+    Open;
+  End;
+end;
+
+procedure TfrmListaCidade.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  frmMain.sCodCid := Cod.Text;
+end;
+
+procedure TfrmListaCidade.FormCreate(Sender: TObject);
+begin
+  inherited;
+  EdtLoc.DataField := 'NOME';
+  gbNome.Caption := 'Cidade';
+  FiltraPorClick('ORDER BY NOME');
+end;
+
+procedure TfrmListaCidade.gListaKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+
+  if Key = 13 then
+    Close;
+end;
+
+procedure TfrmListaCidade.gListaTitleBtnClick(Sender: TObject; ACol: Integer;
+  Field: TField);
+begin
+  inherited;
+  case ACol of
+    0:
+      Begin
+        EdtLoc.DataField := 'ID_CIDADE';
+        gbNome.Caption := 'Cod. Cidade';
+        FiltraPorClick('ORDER BY ID_CIDADE');
+      End;
+    1:
+      Begin
+        EdtLoc.DataField := 'NOME';
+        gbNome.Caption := 'Cidade';
+        FiltraPorClick('ORDER BY NOME');
+      End;
+    2:
+      Begin
+        EdtLoc.DataField := 'UF';
+        gbNome.Caption := 'UF';
+        FiltraPorClick('ORDER BY UF, NOME');
+      End;
+    3:
+      Begin
+        EdtLoc.DataField := 'CODIBGE';
+        gbNome.Caption := 'Cod. IBGE';
+        FiltraPorClick('ORDER BY CODIBGE');
+      End;
+  end;
+end;
+
+procedure TfrmListaCidade.SpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+  AbreForm(TfrmCadCidades, frmCadCidades);
+  frmCadCidades.Free;
+  qryPesquisa.Close;
+  qryPesquisa.Open;
+end;
+
+procedure TfrmListaCidade.SpeedButton3Click(Sender: TObject);
+begin
+  inherited;
+
+  if Not Operador.CidadesE then
+  Begin
+    application.MessageBox('Operador não tem permissão para editar uma cidade!',
+      'Acesso Negado', mb_ok + MB_ICONWARNING);
+    Exit;
+  End;
+
+  if Cod.Text = '' then
+  Begin
+    application.MessageBox('Nem uma cidade selecionada para exclusão!',
+      'Erro!!!', mb_ok + MB_ICONERROR);
+    Exit;
+  End;
+
+  If application.MessageBox('Confirma Exclusão ?', 'Atenção!!!',
+    MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES Then
+  Begin
+    With qryAUx do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('DELETE FROM CIDADE');
+      SQL.Add('WHERE ID_CIDADE = :pCod');
+      Parameters.ParamByName('pCod').Value := StrToInt(Cod.Text);
+      ExecSQL;
+    end;
+    qryPesquisa.Close;
+    qryPesquisa.Open;
+    application.MessageBox('Cidade excluida com sucesso', 'Sucesso!!!',
+      mb_ok + MB_ICONINFORMATION);
+  End;
+end;
+
+end.

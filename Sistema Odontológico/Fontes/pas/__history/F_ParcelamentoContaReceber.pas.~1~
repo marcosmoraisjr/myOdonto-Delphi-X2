@@ -1,0 +1,76 @@
+unit F_ParcelamentoContaReceber;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
+  dxSkinsDefaultPainters, Data.DB, Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids,
+  JvExDBGrids, JvDBGrid, JvDBUltimGrid, Vcl.StdCtrls, Vcl.Mask, JvExMask,
+  JvToolEdit, cxTextEdit, cxCurrencyEdit, Vcl.Buttons, JvComponentBase,
+  JvEnterTab, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmParcelamentoContaReceber = class(TfrmPadrao)
+    btnSalvar: TSpeedButton;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    SpeedButton6: TSpeedButton;
+    EdtValor: TcxCurrencyEdit;
+    EdtDtConta: TJvDateEdit;
+    EdtParcelas: TEdit;
+    GroupBox2: TGroupBox;
+    gridPagamento: TJvDBUltimGrid;
+    btnFechar: TSpeedButton;
+    qryParcelas: TADOQuery;
+    qryParcelasDataPgto: TDateTimeField;
+    qryParcelasValor: TFloatField;
+    dsParcelas: TDataSource;
+    qryAux: TADOQuery;
+    procedure SpeedButton6Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmParcelamentoContaReceber: TfrmParcelamentoContaReceber;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmParcelamentoContaReceber.SpeedButton6Click(Sender: TObject);
+var
+  i : integer;
+  dDataVcto : TDate;
+  rValor : Double;
+begin
+  inherited;
+  i := 0;
+  dDataVcto := EdtDtConta.Date;
+
+  With qryParcelas do
+    Begin
+      Close;
+      Open;
+
+      rValor := EdtValor.Value / StrToFloat(EdtParcelas.Text);
+
+      for i := 1 to StrToInt(EdtParcelas.Text) do
+        Begin
+          Append;
+          FieldByName('DataPgto').AsDateTime := dDataVcto;
+          FieldByName('Valor').AsFloat := rValor;
+          Post;
+
+          dDataVcto := IncMonth(dDataVcto, 1);
+        End;
+    End;
+end;
+
+end.

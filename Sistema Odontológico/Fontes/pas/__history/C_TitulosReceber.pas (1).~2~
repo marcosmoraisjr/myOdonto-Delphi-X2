@@ -1,0 +1,62 @@
+unit C_TitulosReceber;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
+  dxSkinsDefaultPainters, cxTextEdit, cxCurrencyEdit, JvToolEdit, Vcl.StdCtrls,
+  Vcl.Mask, JvExMask, Vcl.Buttons, Data.DB, Data.Win.ADODB, JvComponentBase,
+  JvEnterTab, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmCadTitulosReceber = class(TfrmPadrao)
+    qryAux: TADOQuery;
+    btnSalvar: TSpeedButton;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    EdtCodF: TJvComboEdit;
+    EdtFornecedor: TEdit;
+    EdtHistorico: TEdit;
+    EdtDocumento: TEdit;
+    EdtDtConta: TJvDateEdit;
+    EdtDtVencimento: TJvDateEdit;
+    EdtNroNota: TEdit;
+    EdtValor: TcxCurrencyEdit;
+    EdtDesconto: TcxCurrencyEdit;
+    EdtJuros: TcxCurrencyEdit;
+    EdtDtPagamento: TJvDateEdit;
+    EdtVlrPago: TcxCurrencyEdit;
+    btnFechar: TSpeedButton;
+    procedure btnFecharClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadTitulosReceber: TfrmCadTitulosReceber;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmCadTitulosReceber.btnFecharClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+end.

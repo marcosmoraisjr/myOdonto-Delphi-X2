@@ -1,0 +1,176 @@
+unit L_Medicos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ListaPadrao, Data.DB, Data.Win.ADODB,
+  JvComponentBase, JvEnterTab, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
+  JvExDBGrids, JvDBGrid, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.Buttons, Funcoes,
+  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer,
+  cxEdit, dxSkinsCore, dxSkinsDefaultPainters, cxCheckBox, JvExStdCtrls, JvEdit,
+  JvDBSearchEdit, Vcl.Menus, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup,
+  Menus, cxButtons;
+
+type
+  TfrmListaMedicos = class(TfrmListaPadrao)
+    qryPadraoNOME: TStringField;
+    qryPadraoCPF: TStringField;
+    qryPadraoID_MEDICO: TAutoIncField;
+    qryPadraoRG: TStringField;
+    qryPadraoDTANASC: TDateTimeField;
+    qryPadraoSEXO: TStringField;
+    qryPadraoENDERECO: TStringField;
+    qryPadraoNRO: TStringField;
+    qryPadraoBAIRRO: TStringField;
+    qryPadraoCEP: TStringField;
+    qryPadraoTELEFONE: TStringField;
+    qryPadraoCELULAR: TStringField;
+    qryPadraoEMAIL: TStringField;
+    qryPadraoCRO: TStringField;
+    qryPadraoUFCONSELHO: TStringField;
+    qryPadraoCBOS: TIntegerField;
+    qryPadraoSALARIO: TFloatField;
+    qryPadraoOBSERVACAO: TMemoField;
+    qryPadraoAtivo: TStringField;
+    qryPadraoCidade: TStringField;
+    qryPadraoUF: TStringField;
+    qryPadraoCodCNES: TStringField;
+    procedure btnAdicionarClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure gListaDblClick(Sender: TObject);
+    procedure gListaTitleBtnClick(Sender: TObject; ACol: Integer;
+      Field: TField);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+    Procedure FiltraPorClick(OrderBy: String);
+  public
+    { Public declarations }
+  end;
+
+var
+  frmListaMedicos: TfrmListaMedicos;
+
+implementation
+
+{$R *.dfm}
+
+uses C_Medico, E_Medico;
+
+procedure TfrmListaMedicos.btnAdicionarClick(Sender: TObject);
+begin
+  inherited;
+  if Not Operador.DentistasC then
+  Begin
+    application.MessageBox
+      ('Operador não tem permissão para cadastrar um dentista!',
+      'Acesso Negado', mb_ok + MB_ICONWARNING);
+    Exit;
+  End;
+
+  AbreForm(TfrmCadMedico, frmCadMedico);
+  qryPadrao.Close;
+  qryPadrao.Open;
+end;
+
+procedure TfrmListaMedicos.btnEditarClick(Sender: TObject);
+begin
+  if Not Operador.DentistasC then
+  Begin
+    application.MessageBox
+      ('Operador não tem permissão para editar um dentista!', 'Acesso Negado',
+      mb_ok + MB_ICONWARNING);
+    Exit;
+  End;
+
+  application.CreateForm(TfrmEdtMedico, frmEdtMedico);
+  frmEdtMedico.sCod := qryPadrao.FieldByName('ID_MEDICO').AsString;
+  frmEdtMedico.ShowModal;
+  FreeAndNil(frmEdtMedico);
+  qryPadrao.Close;
+  qryPadrao.Open;
+end;
+
+procedure TfrmListaMedicos.FiltraPorClick(OrderBy: String);
+begin
+  With qryPadrao do
+  Begin
+    Close;
+    SQL.Clear;
+    SQL.Add('SELECT MEDICOS.NOME, MEDICOS.CPF, MEDICOS.ID_MEDICO, MEDICOS.RG, MEDICOS.DTANASC, MEDICOS.SEXO, MEDICOS.ENDERECO,');
+    SQL.Add('MEDICOS.NRO, MEDICOS.BAIRRO, MEDICOS.CEP, MEDICOS.TELEFONE, MEDICOS.CELULAR, MEDICOS.EMAIL, MEDICOS.CRO,');
+    SQL.Add('MEDICOS.UFCONSELHO, MEDICOS.CBOS, MEDICOS.CodCNES, MEDICOS.SALARIO, MEDICOS.OBSERVACAO, MEDICOS.Ativo,');
+    SQL.Add('CIDADE.NOME AS Cidade, CIDADE.UF FROM MEDICOS');
+    SQL.Add('INNER JOIN CIDADE ON MEDICOS.ID_CIDADE = CIDADE.ID_CIDADE');
+    SQL.Add(OrderBy);
+    Open;
+  End;
+end;
+
+procedure TfrmListaMedicos.FormCreate(Sender: TObject);
+begin
+  inherited;
+  EdtPesquisa.DataField := 'NOME';
+  GroupBox1.Caption := 'Dentista';
+  FiltraPorClick('Order By NOME, ID_MEDICO');
+end;
+
+procedure TfrmListaMedicos.gListaDblClick(Sender: TObject);
+begin
+  inherited;
+  btnEditarClick(Sender);
+end;
+
+procedure TfrmListaMedicos.gListaTitleBtnClick(Sender: TObject; ACol: Integer;
+  Field: TField);
+begin
+  inherited;
+  case ACol of
+    0:
+      Begin
+        EdtPesquisa.DataField := 'ID_MEDICO';
+        GroupBox1.Caption := 'Cod. Dentista';
+        FiltraPorClick('Order By ID_MEDICO');
+      End;
+    1:
+      Begin
+        EdtPesquisa.DataField := 'NOME';
+        GroupBox1.Caption := 'Dentista';
+        FiltraPorClick('Order By NOME, ID_MEDICO');
+      End;
+    2:
+      Begin
+        EdtPesquisa.DataField := 'DTANASC';
+        GroupBox1.Caption := 'Data Nascimento';
+        FiltraPorClick('Order By DTANASC, NOME, ID_MEDICO');
+      End;
+    3:
+      Begin
+        EdtPesquisa.DataField := 'TELEFONE';
+        GroupBox1.Caption := 'Telefone';
+        FiltraPorClick('Order By TELEFONE, NOME, ID_MEDICO');
+      End;
+    4:
+      Begin
+        EdtPesquisa.DataField := 'Celular';
+        GroupBox1.Caption := 'Celular';
+        FiltraPorClick('Order By Celular, NOME, ID_MEDICO');
+      End;
+    5:
+      Begin
+        EdtPesquisa.DataField := 'CRO';
+        GroupBox1.Caption := 'Número do CRO';
+        FiltraPorClick('Order By CRO, NOME, ID_MEDICO');
+      End;
+    6:
+      Begin
+        EdtPesquisa.DataField := 'Cidade';
+        GroupBox1.Caption := 'Cidade';
+        FiltraPorClick('Order By Cidade, NOME, ID_MEDICO');
+      End;
+  end;
+end;
+
+end.

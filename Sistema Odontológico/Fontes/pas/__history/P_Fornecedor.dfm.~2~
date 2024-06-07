@@ -1,0 +1,64 @@
+inherited frmPesquisaFornecedor: TfrmPesquisaFornecedor
+  ExplicitTop = -149
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited gLista: TJvDBGrid
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID_FORNECEDOR'
+        Title.Caption = 'Cod'
+        Width = 29
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOME'
+        Title.Caption = 'Nome'
+        Width = 177
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'RAZAOSOCIAL'
+        Title.Caption = 'Raz'#227'o Social'
+        Width = 157
+        Visible = True
+      end>
+  end
+  inherited Panel1: TPanel
+    Caption = 'Pesquisa de Fornecedores'
+  end
+  inherited gbNome: TGroupBox
+    ExplicitTop = 463
+  end
+  inherited qryPesquisa: TADOQuery
+    SQL.Strings = (
+      
+        'SELECT FORNECEDOR.ID_FORNECEDOR, FORNECEDOR.ID_FILIAL, FORNECEDO' +
+        'R.ID_CIDADE, FORNECEDOR.FISICA_JURIDICA, FORNECEDOR.ATIVO, '
+      
+        'FORNECEDOR.NOME, FORNECEDOR.RAZAOSOCIAL, FORNECEDOR.CPFCNPJ, FOR' +
+        'NECEDOR.RGIE, FORNECEDOR.DTANASCIMENTO, FORNECEDOR.SEXO, '
+      
+        'FORNECEDOR.NUMERO, FORNECEDOR.ENDERECO, FORNECEDOR.BAIRRO, FORNE' +
+        'CEDOR.TELEFONE, FORNECEDOR.CEP, FORNECEDOR.EMAIL, FORNECEDOR.CEL' +
+        'ULAR,'
+      
+        'FORNECEDOR.OBSERVACAO, CIDADE.NOME AS Cidade, CIDADE.UF FROM FOR' +
+        'NECEDOR '
+      'INNER JOIN CIDADE ON FORNECEDOR.ID_CIDADE = CIDADE.ID_CIDADE')
+    object qryPesquisaID_FORNECEDOR: TAutoIncField
+      FieldName = 'ID_FORNECEDOR'
+      ReadOnly = True
+    end
+    object qryPesquisaNOME: TStringField
+      FieldName = 'NOME'
+      Size = 255
+    end
+    object qryPesquisaRAZAOSOCIAL: TStringField
+      FieldName = 'RAZAOSOCIAL'
+      Size = 200
+    end
+  end
+end

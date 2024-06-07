@@ -1,0 +1,26 @@
+unit F_ReforcoCaixa;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Funcoes, Vcl.Dialogs, Padrao, Data.DB,
+  Data.Win.ADODB, JvComponentBase, JvEnterTab, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmReforcoCaixa = class(TfrmPadrao)
+    qryAux: TADOQuery;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmReforcoCaixa: TfrmReforcoCaixa;
+
+implementation
+
+{$R *.dfm}
+
+end.

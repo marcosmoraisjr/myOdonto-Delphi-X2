@@ -1,0 +1,41 @@
+unit P_DocumentosPersonalizados;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, P_Padrao, Data.DB, JvComponentBase,
+  JvEnterTab, Data.Win.ADODB, Vcl.StdCtrls, JvExStdCtrls, JvEdit,
+  JvDBSearchEdit, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Funcoes,
+  JvExDBGrids, JvDBGrid;
+
+type
+  TfrmPDocsPersonalizados = class(TfrmPesquisaPadrao)
+    qryPesquisaDESCRICAO: TStringField;
+    qryPesquisaID_DOCUMENTOS: TAutoIncField;
+    qryAux2: TADOQuery;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPDocsPersonalizados: TfrmPDocsPersonalizados;
+
+implementation
+
+{$R *.dfm}
+
+uses Main, C_EmissaoDocumentoPersonalizado;
+
+procedure TfrmPDocsPersonalizados.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+  frmMain.sCod := qryPesquisaID_DOCUMENTOS.AsString;
+end;
+
+
+end.

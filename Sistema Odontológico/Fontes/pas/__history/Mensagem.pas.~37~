@@ -1,0 +1,59 @@
+unit Mensagem;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
+  dxSkinsDefaultPainters, Vcl.StdCtrls, cxProgressBar, Data.DB, Data.Win.ADODB;
+
+type
+  TfrmMensagem = class(TForm)
+    Barra: TcxProgressBar;
+    lblDescricao: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    bAnexar: Boolean;
+  end;
+
+var
+  frmMensagem: TfrmMensagem;
+
+implementation
+
+{$R *.dfm}
+{ TfrmMensagem }
+
+Function PastaArquivo: String;
+var
+  sPasta: String;
+Begin
+
+  sPasta := ParamStr(0);
+  sPasta := ExtractFilePath(sPasta);
+
+  Result := sPasta;
+End;
+
+procedure TfrmMensagem.FormActivate(Sender: TObject);
+var
+  i: integer;
+begin
+  if bAnexar = True then
+  Begin
+    lblDescricao.Caption := 'Configurando Banco de Dados....';
+  End;
+end;
+
+procedure TfrmMensagem.FormCreate(Sender: TObject);
+begin
+  bAnexar := False;
+end;
+
+end.

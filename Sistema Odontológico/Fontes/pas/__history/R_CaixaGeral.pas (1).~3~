@@ -1,0 +1,85 @@
+unit R_CaixaGeral;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, JvComponentBase, JvEnterTab,
+  Vcl.ComCtrls, Vcl.ExtCtrls, Data.DB, Data.Win.ADODB, QRPDFFilt, QRCtrls,
+  QuickRpt;
+
+type
+  TfrmRelCaixaGeral = class(TfrmPadrao)
+    relPrevia: TQuickRep;
+    QRBand6: TQRBand;
+    QRLabel11: TQRLabel;
+    QRSysData5: TQRSysData;
+    QRSysData6: TQRSysData;
+    QRLabel12: TQRLabel;
+    QRBand7: TQRBand;
+    QRShape6: TQRShape;
+    QRShape7: TQRShape;
+    QRGroup1: TQRGroup;
+    QRLabel13: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRBand4: TQRBand;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRBand5: TQRBand;
+    QRBand8: TQRBand;
+    QRSysData4: TQRSysData;
+    lblEmpCab: TQRLabel;
+    lblCaixaCab: TQRLabel;
+    QRLabel4: TQRLabel;
+    SalvarPDF: TQRPDFFilter;
+    qryAux: TADOQuery;
+    qryRel: TADOQuery;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel15: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRDBText4: TQRDBText;
+    QRLabel14: TQRLabel;
+    lblTEntradas: TQRLabel;
+    lblTSaidas: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRLabel17: TQRLabel;
+    QRLabel18: TQRLabel;
+    QRLabel19: TQRLabel;
+    qryRelID_SALDOCAIXA: TAutoIncField;
+    qryRelTIPODESPESA: TIntegerField;
+    qryRelENTRADA_SAIDA: TIntegerField;
+    qryRelID_OPERADORES: TIntegerField;
+    qryRelID_CAIXAS: TIntegerField;
+    qryRelHISTORICO: TStringField;
+    qryRelDOCUMENTO: TStringField;
+    qryRelDATA: TDateTimeField;
+    qryRelVLRENTRADA: TFloatField;
+    qryRelVLRSAIDA: TFloatField;
+    qryAux2: TADOQuery;
+    qryAux2ID_OPINT: TAutoIncField;
+    qryAux2CODCLIENTE: TStringField;
+    qryAux2CONTRACHAVE: TStringField;
+    qryAux2DEMO: TBooleanField;
+    qryAux2ADICIONAL: TBooleanField;
+    qryAux2VERSAODB: TIntegerField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmRelCaixaGeral: TfrmRelCaixaGeral;
+
+implementation
+
+{$R *.dfm}
+
+end.

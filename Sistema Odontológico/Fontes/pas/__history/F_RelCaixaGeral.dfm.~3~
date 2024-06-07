@@ -1,0 +1,42 @@
+inherited frmGerarRelCaixaGeral: TfrmGerarRelCaixaGeral
+  ClientHeight = 166
+  ClientWidth = 451
+  OnClose = FormClose
+  ExplicitWidth = 457
+  ExplicitHeight = 190
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 451
+    ExplicitWidth = 451
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 142
+    Width = 451
+    ExplicitTop = 142
+    ExplicitWidth = 451
+  end
+  object Button1: TButton [2]
+    Left = 312
+    Top = 96
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 2
+    OnClick = Button1Click
+  end
+  object EdtDtNasc: TJvDateEdit [3]
+    Left = 68
+    Top = 81
+    Width = 98
+    Height = 21
+    TabOrder = 3
+  end
+  object JvDateEdit1: TJvDateEdit [4]
+    Left = 196
+    Top = 81
+    Width = 98
+    Height = 21
+    TabOrder = 4
+  end
+end

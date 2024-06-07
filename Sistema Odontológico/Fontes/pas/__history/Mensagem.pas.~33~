@@ -1,0 +1,99 @@
+unit Mensagem;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
+  dxSkinsDefaultPainters, Vcl.StdCtrls, cxProgressBar, Data.DB, Data.Win.ADODB;
+
+type
+  TfrmMensagem = class(TForm)
+    Barra: TcxProgressBar;
+    lblDescricao: TLabel;
+    ConexaoAux: TADOConnection;
+    qryAux: TADOQuery;
+    procedure FormCreate(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    bAnexar: Boolean;
+    Procedure AnexaBancoDeDados;
+  end;
+
+var
+  frmMensagem: TfrmMensagem;
+
+implementation
+
+{$R *.dfm}
+{ TfrmMensagem }
+
+Function PastaArquivo: String;
+var
+  sPasta: String;
+Begin
+
+  sPasta := ParamStr(0);
+  sPasta := ExtractFilePath(sPasta);
+
+  Result := sPasta;
+End;
+
+procedure TfrmMensagem.AnexaBancoDeDados;
+begin
+  ConexaoAux.ConnectionString :=
+    'Provider=SQLOLEDB.1;Password=f15afn7;Persist Security Info=True;User ID=sa;Initial Catalog=MASTER;Data Source=.\ODONTOSIS';
+  ConexaoAux.Connected;
+  If FileExists(PastaArquivo + 'INS.odsis') then
+  Begin
+    With qryAux do
+    Begin
+      Close;
+      SQL.CLear;
+      SQL.Add('CREATE DATABASE [ODONTOSIS] ON');
+      SQL.Add('( FILENAME = N' + QuotedStr(PastaArquivo +
+        'Data\ODONTOSIS.mdf') + ' ),');
+      SQL.Add('( FILENAME = N' + QuotedStr(PastaArquivo +
+        'Data\ODONTOSIS_log.ldf') + ' )');
+      SQL.Add('FOR ATTACH');
+      ExecSQL;
+
+      Close;
+      SQL.CLear;
+      SQL.Add('CREATE DATABASE [ODSIMAGENS] ON');
+      SQL.Add('( FILENAME = N' + QuotedStr(PastaArquivo +
+        'Data\ODSIMAGENS.mdf') + ' ),');
+      SQL.Add('( FILENAME = N' + QuotedStr(PastaArquivo +
+        'Data\ODSIMAGENS_log.ldf') + ' )');
+      SQL.Add('FOR ATTACH');
+      ExecSQL;
+      DeleteFile(PastaArquivo + 'INS.odsis');
+    End;
+  End;
+  ConexaoAux.Connected := False;
+  ConexaoAux.ConnectionString := '';
+end;
+
+procedure TfrmMensagem.FormActivate(Sender: TObject);
+var
+  i: integer;
+begin
+  if bAnexar = True then
+  Begin
+    lblDescricao.Caption := 'Configurando Banco de Dados....';
+    AnexaBancoDeDados;
+    Close;
+  End;
+end;
+
+procedure TfrmMensagem.FormCreate(Sender: TObject);
+begin
+  bAnexar := False;
+end;
+
+end.

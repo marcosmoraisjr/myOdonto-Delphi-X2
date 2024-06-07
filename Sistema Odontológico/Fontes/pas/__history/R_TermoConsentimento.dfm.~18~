@@ -1,0 +1,1732 @@
+inherited frmRelTermoConsentimento: TfrmRelTermoConsentimento
+  Caption = 'frmRelTermoConsentimento'
+  ClientWidth = 1324
+  ExplicitWidth = 1340
+  ExplicitHeight = 658
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Relatorio: TQuickRep
+    Left = -190
+    Top = -459
+    Functions.Strings = (
+      'PAGENUMBER'
+      'COLUMNNUMBER'
+      'REPORTTITLE'
+      'QRSTRINGSBAND1')
+    Functions.DATA = (
+      '0'
+      '0'
+      #39#39
+      #39#39)
+    Page.Values = (
+      100.000000000000000000
+      2970.000000000000000000
+      100.000000000000000000
+      2100.000000000000000000
+      100.000000000000000000
+      100.000000000000000000
+      0.000000000000000000)
+    ReportTitle = 'TERMO DE CONSENTIMENTO INFORMADO'
+    ExplicitLeft = -190
+    ExplicitTop = -459
+    inherited QRBand1: TQRBand
+      Size.Values = (
+        306.916666666666700000
+        1899.708333333333000000)
+      inherited QRSysData1: TQRSysData
+        Size.Values = (
+          71.437500000000000000
+          10.583333333333330000
+          232.833333333333300000
+          1875.895833333333000000)
+        FontSize = 14
+      end
+      inherited lblRua: TQRLabel
+        Size.Values = (
+          44.979166666666670000
+          1791.229166666667000000
+          15.875000000000000000
+          97.895833333333330000)
+        FontSize = 10
+      end
+      inherited lblCidade: TQRLabel
+        Size.Values = (
+          44.979166666666670000
+          1746.250000000000000000
+          66.145833333333330000
+          142.875000000000000000)
+        FontSize = 10
+      end
+      inherited lbltelefone: TQRLabel
+        Size.Values = (
+          44.979166666666670000
+          1733.020833333333000000
+          113.770833333333300000
+          156.104166666666700000)
+        FontSize = 10
+      end
+      inherited lblEmail: TQRLabel
+        Size.Values = (
+          44.979166666666670000
+          1770.062500000000000000
+          158.750000000000000000
+          119.062500000000000000)
+        FontSize = 10
+      end
+      inherited lblRazao: TQRLabel
+        Size.Values = (
+          44.979166666666670000
+          306.916666666666700000
+          79.375000000000000000
+          206.375000000000000000)
+        FontSize = 10
+      end
+      inherited lblEmpresa: TQRLabel
+        Size.Values = (
+          66.145833333333330000
+          306.916666666666700000
+          21.166666666666670000
+          838.729166666666700000)
+        FontSize = 12
+      end
+      inherited LogoEmpresa: TQRImage
+        Size.Values = (
+          187.854166666666700000
+          21.166666666666670000
+          13.229166666666670000
+          280.458333333333300000)
+      end
+      inherited QRShape12: TQRShape
+        Size.Values = (
+          2.645833333333333000
+          5.291666666666667000
+          209.020833333333300000
+          1899.708333333333000000)
+      end
+      inherited QRShape5: TQRShape
+        Size.Values = (
+          2.645833333333333000
+          5.291666666666667000
+          0.000000000000000000
+          1899.708333333333000000)
+      end
+    end
+    inherited QRBand3: TQRBand
+      Top = 890
+      Size.Values = (
+        84.666666666666670000
+        1899.708333333333000000)
+      ExplicitTop = 890
+      inherited QRLabel1: TQRLabel
+        Size.Values = (
+          44.979166666666670000
+          1357.312500000000000000
+          15.875000000000000000
+          542.395833333333300000)
+        FontSize = 10
+      end
+      inherited QRSysData3: TQRSysData
+        Width = 68
+        Size.Values = (
+          44.979166666666670000
+          201.083333333333300000
+          15.875000000000000000
+          179.916666666666700000)
+        FontSize = 10
+        ExplicitWidth = 68
+      end
+      inherited QRSysData2: TQRSysData
+        Left = 336
+        Width = 46
+        Size.Values = (
+          44.979166666666670000
+          889.000000000000000000
+          15.875000000000000000
+          121.708333333333300000)
+        FontSize = 10
+        ExplicitLeft = 336
+        ExplicitWidth = 46
+      end
+      inherited QRLabel2: TQRLabel
+        Size.Values = (
+          44.979166666666670000
+          13.229166666666670000
+          15.875000000000000000
+          171.979166666666700000)
+        FontSize = 10
+      end
+    end
+    inherited QRBand2: TQRBand
+      Size.Values = (
+        0.000000000000000000
+        1899.708333333333000000)
+      inherited QRShape1: TQRShape
+        Size.Values = (
+          2.645833333333333000
+          0.000000000000000000
+          0.000000000000000000
+          1894.416666666667000000)
+      end
+      inherited QRShape2: TQRShape
+        Size.Values = (
+          2.645833333333333000
+          0.000000000000000000
+          211.666666666666700000
+          1899.708333333333000000)
+      end
+    end
+    object QRGroup1: TQRGroup
+      Left = 38
+      Top = 154
+      Width = 718
+      Height = 7
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        18.520833333333330000
+        1899.708333333333000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      Expression = 'qryRel.ID_TERMOCONSENTIMENTO'
+      FooterBand = QRBand10
+      Master = Relatorio
+      ReprintOnNewPage = False
+    end
+    object QRBand4: TQRBand
+      Left = 38
+      Top = 161
+      Width = 718
+      Height = 584
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        1545.166666666667000000
+        1899.708333333333000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbDetail
+      object QRMemo1: TQRMemo
+        Left = 8
+        Top = 6
+        Width = 713
+        Height = 579
+        Size.Values = (
+          1531.937500000000000000
+          21.166666666666670000
+          15.875000000000000000
+          1886.479166666667000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        Lines.Strings = (
+          
+            '           Pelo presente instrumento, eu, ____________________, ' +
+            'infra-assinado(a) '
+          
+            'na qualidade de respons'#225'vel legal do(a) menor ________________, ' +
+            'declaro que '
+          
+            'fui suficientemente esclarecido(a) pelo cirurgi'#227'o dentista _____' +
+            '___________, '
+          
+            'registrado no CRO-PR sob n'#186' 123456789012345, sobre os procedimen' +
+            'tos'
+          
+            'cl'#237'nicos necess'#225'rios a que o(a) menor ser'#225' submetido, bem como d' +
+            'o diagn'#243'stico, '
+          
+            'progn'#243'stico, proserva'#231#227'o, riscos e objetivos do tratamento odont' +
+            'ol'#243'gico. '
+          
+            '           Declaro tamb'#233'm que fui informado(a) de todos os cuida' +
+            'dos e '
+          
+            'orienta'#231#245'es que devo seguir a fim de alcan'#231'ar os melhores result' +
+            'ados na '
+          
+            'manuten'#231#227'o da sa'#250'de bucal. Estou ciente que o tratamento n'#227'o se ' +
+            'limita apenas '
+          
+            'aos procedimentos realizados, sendo que deverei retornar ao cons' +
+            'ult'#243'rio nos '
+          
+            'dias determinados pelo cirurgi'#227'o dentista, bem como inform'#225'-lo i' +
+            'mediatamente '
+          
+            'sobre poss'#237'veis altera'#231#245'es e/ou problemas que porventura possam ' +
+            'surgir. '
+          
+            '           Se qualquer condi'#231#227'o n'#227'o prevista ocorrer durante os ' +
+            'procedimentos, '
+          
+            'confio no julgamento do profissional para altera'#231#245'es no plano de' +
+            ' tratamento. Eu '
+          'solicito e autorizo fazer o que for aconselhado. '
+          
+            '           Tive a oportunidade de discutir com o profissional o ' +
+            'hist'#243'rico m'#233'dicoodontol'#243'gico, tendo preenchido uma ficha de anam' +
+            'nese.'
+          
+            ' Concordo em cooperar completamente com as recomenda'#231#245'es supraci' +
+            'tadas '
+          
+            'enquanto estiver sob seus cuidados, e entendo que qualquer falta' +
+            ' de colabora'#231#227'o'
+          
+            ' pode resultar em diminui'#231#227'o ou aus'#234'ncia dos resultados esperado' +
+            's. '
+          
+            '           Certifico que tive oportunidade de ler e entender com' +
+            'pletamente os '
+          
+            'termos e palavras contidos no texto acima, e que me foram dadas ' +
+            'explica'#231#245'es '
+          
+            'referentes a ele, e manifesto expressamente minha concord'#226'ncia e' +
+            ' meu '
+          'consentimento para realiza'#231#227'o do tratamento odontol'#243'gico.')
+        ParentFont = False
+        Transparent = False
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 14
+      end
+      object lblNomeRM: TQRLabel
+        Left = 324
+        Top = 6
+        Width = 226
+        Height = 23
+        Size.Values = (
+          60.854166666666670000
+          857.250000000000000000
+          15.875000000000000000
+          597.958333333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        Caption = 'Seu nome 1234,'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 14
+      end
+      object lblNomeMenor: TQRLabel
+        Left = 407
+        Top = 28
+        Width = 181
+        Height = 23
+        Size.Values = (
+          60.854166666666670000
+          1076.854166666667000000
+          74.083333333333330000
+          478.895833333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        Caption = 'Nome do Menor,'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 14
+      end
+      object lblNomeDentistaM: TQRLabel
+        Left = 486
+        Top = 50
+        Width = 211
+        Height = 23
+        Size.Values = (
+          60.854166666666670000
+          1285.875000000000000000
+          132.291666666666700000
+          558.270833333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        Caption = 'Nome do Dentista,'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 14
+      end
+      object lblCROMENOR: TQRLabel
+        Left = 124
+        Top = 73
+        Width = 314
+        Height = 23
+        Size.Values = (
+          60.854166666666670000
+          328.083333333333300000
+          193.145833333333300000
+          830.791666666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        Caption = 'CRO-PR sob n'#186' 123456789012345,'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 14
+      end
+    end
+    object QRBand10: TQRBand
+      Left = 38
+      Top = 745
+      Width = 718
+      Height = 145
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        383.645833333333300000
+        1899.708333333333000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbGroupFooter
+      object QRShape8: TQRShape
+        Left = 374
+        Top = 88
+        Width = 314
+        Height = 1
+        Size.Values = (
+          2.645833333333333000
+          989.541666666666700000
+          232.833333333333300000
+          830.791666666666700000)
+        XLColumn = 0
+        Shape = qrsRectangle
+        VertAdjust = 0
+      end
+      object lblLocalMenor: TQRLabel
+        Left = 374
+        Top = 24
+        Width = 339
+        Height = 23
+        Size.Values = (
+          60.854166666666670000
+          989.541666666666700000
+          63.500000000000000000
+          896.937500000000000000)
+        XLColumn = 0
+        Alignment = taRightJustify
+        AlignToBand = False
+        Caption = 'Pato Branco, 31 de Dezembro de 2999.'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 14
+      end
+      object lblRespAssM: TQRLabel
+        Left = 374
+        Top = 90
+        Width = 317
+        Height = 23
+        Size.Values = (
+          60.854166666666670000
+          989.541666666666700000
+          238.125000000000000000
+          838.729166666666700000)
+        XLColumn = 0
+        Alignment = taCenter
+        AlignToBand = False
+        AutoSize = False
+        Caption = 'Nome do Responsavel'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 14
+      end
+      object lblRespRGM: TQRLabel
+        Left = 374
+        Top = 109
+        Width = 317
+        Height = 23
+        Size.Values = (
+          60.854166666666670000
+          989.541666666666700000
+          288.395833333333300000
+          838.729166666666700000)
+        XLColumn = 0
+        Alignment = taCenter
+        AlignToBand = False
+        AutoSize = False
+        Caption = 'RG DO RESPONSAVEL'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 14
+      end
+    end
+  end
+  object RelMaiorIdade: TQuickRep [1]
+    Left = -63
+    Top = -625
+    Width = 794
+    Height = 1123
+    DataSet = qryRel
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    Functions.Strings = (
+      'PAGENUMBER'
+      'COLUMNNUMBER'
+      'REPORTTITLE'
+      'QRSTRINGSBAND1')
+    Functions.DATA = (
+      '0'
+      '0'
+      #39#39
+      #39#39)
+    Options = [FirstPageHeader, LastPageFooter]
+    Page.Columns = 1
+    Page.Orientation = poPortrait
+    Page.PaperSize = A4
+    Page.Continuous = False
+    Page.Values = (
+      100.000000000000000000
+      2970.000000000000000000
+      100.000000000000000000
+      2100.000000000000000000
+      100.000000000000000000
+      100.000000000000000000
+      0.000000000000000000)
+    PrinterSettings.Copies = 1
+    PrinterSettings.OutputBin = Auto
+    PrinterSettings.Duplex = False
+    PrinterSettings.FirstPage = 0
+    PrinterSettings.LastPage = 0
+    PrinterSettings.UseStandardprinter = False
+    PrinterSettings.UseCustomBinCode = False
+    PrinterSettings.CustomBinCode = 0
+    PrinterSettings.ExtendedDuplex = 0
+    PrinterSettings.UseCustomPaperCode = False
+    PrinterSettings.CustomPaperCode = 0
+    PrinterSettings.PrintMetaFile = False
+    PrinterSettings.PrintQuality = 0
+    PrinterSettings.Collate = 0
+    PrinterSettings.ColorOption = 0
+    PrintIfEmpty = True
+    ReportTitle = 'TERMO DE CONSENTIMENTO INFORMADO'
+    SnapToGrid = True
+    Units = MM
+    Zoom = 100
+    PrevFormStyle = fsNormal
+    PreviewInitialState = wsMaximized
+    PrevShowThumbs = False
+    PrevShowSearch = False
+    PrevInitialZoom = qrZoom100
+    PreviewDefaultSaveType = stQRP
+    PreviewLeft = 0
+    PreviewTop = 0
+    object QRBand5: TQRBand
+      Left = 38
+      Top = 38
+      Width = 718
+      Height = 116
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        306.916666666666700000
+        1899.708333333333000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbTitle
+      object QRSysData4: TQRSysData
+        Left = 4
+        Top = 88
+        Width = 709
+        Height = 27
+        Size.Values = (
+          71.437500000000000000
+          10.583333333333330000
+          232.833333333333300000
+          1875.895833333333000000)
+        XLColumn = 0
+        Alignment = taCenter
+        AlignToBand = False
+        AutoSize = False
+        Color = clWhite
+        Data = qrsReportTitle
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        FontSize = 14
+      end
+      object lblRuaCab: TQRLabel
+        Left = 677
+        Top = 6
+        Width = 37
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1791.229166666667000000
+          15.875000000000000000
+          97.895833333333330000)
+        XLColumn = 0
+        Alignment = taRightJustify
+        AlignToBand = False
+        Caption = 'lblRua'
+        Color = clWhite
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object lblCidadeCab: TQRLabel
+        Left = 660
+        Top = 25
+        Width = 54
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1746.250000000000000000
+          66.145833333333330000
+          142.875000000000000000)
+        XLColumn = 0
+        Alignment = taRightJustify
+        AlignToBand = False
+        Caption = 'lblCidade'
+        Color = clWhite
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object lblTelefoneCab: TQRLabel
+        Left = 655
+        Top = 43
+        Width = 59
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1733.020833333333000000
+          113.770833333333300000
+          156.104166666666700000)
+        XLColumn = 0
+        Alignment = taRightJustify
+        AlignToBand = False
+        Caption = 'lbltelefone'
+        Color = clWhite
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object lblEmailCab: TQRLabel
+        Left = 669
+        Top = 60
+        Width = 45
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1770.062500000000000000
+          158.750000000000000000
+          119.062500000000000000)
+        XLColumn = 0
+        Alignment = taRightJustify
+        AlignToBand = False
+        Caption = 'lblemail'
+        Color = clWhite
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object lblRazaoCab: TQRLabel
+        Left = 116
+        Top = 30
+        Width = 78
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          306.916666666666700000
+          79.375000000000000000
+          206.375000000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Raz'#227'o Social'
+        Color = clWhite
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object lblEmpresaCab: TQRLabel
+        Left = 116
+        Top = 8
+        Width = 317
+        Height = 25
+        Size.Values = (
+          66.145833333333330000
+          306.916666666666700000
+          21.166666666666670000
+          838.729166666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        Caption = 'Nome do Consult'#243'rio'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 12
+      end
+      object LogoEmpresaCab: TQRImage
+        Left = 8
+        Top = 5
+        Width = 106
+        Height = 71
+        Size.Values = (
+          187.854166666666700000
+          21.166666666666670000
+          13.229166666666670000
+          280.458333333333300000)
+        XLColumn = 0
+        Center = True
+        Stretch = True
+      end
+      object QRShape3: TQRShape
+        Left = 2
+        Top = 79
+        Width = 718
+        Height = 1
+        Size.Values = (
+          2.645833333333333000
+          5.291666666666667000
+          209.020833333333300000
+          1899.708333333333000000)
+        XLColumn = 0
+        Shape = qrsRectangle
+        VertAdjust = 0
+      end
+      object QRShape4: TQRShape
+        Left = 2
+        Top = 0
+        Width = 718
+        Height = 1
+        Size.Values = (
+          2.645833333333333000
+          5.291666666666667000
+          0.000000000000000000
+          1899.708333333333000000)
+        XLColumn = 0
+        Shape = qrsRectangle
+        VertAdjust = 0
+      end
+    end
+    object QRBand6: TQRBand
+      Left = 38
+      Top = 890
+      Width = 718
+      Height = 32
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        84.666666666666670000
+        1899.708333333333000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbPageFooter
+      object QRLabel11: TQRLabel
+        Left = 513
+        Top = 6
+        Width = 205
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          1357.312500000000000000
+          15.875000000000000000
+          542.395833333333300000)
+        XLColumn = 0
+        Alignment = taRightJustify
+        AlignToBand = True
+        Caption = 'OdontoSis - www.odontosis.com.br'
+        Color = clWhite
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+      object QRSysData5: TQRSysData
+        Left = 76
+        Top = 6
+        Width = 68
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          201.083333333333300000
+          15.875000000000000000
+          179.916666666666700000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        Data = qrsDateTime
+        Transparent = False
+        ExportAs = exptText
+        FontSize = 10
+      end
+      object QRSysData6: TQRSysData
+        Left = 336
+        Top = 6
+        Width = 46
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          889.000000000000000000
+          15.875000000000000000
+          121.708333333333300000)
+        XLColumn = 0
+        Alignment = taCenter
+        AlignToBand = True
+        Color = clWhite
+        Data = qrsPageNumber
+        Transparent = False
+        ExportAs = exptText
+        FontSize = 10
+      end
+      object QRLabel12: TQRLabel
+        Left = 5
+        Top = 6
+        Width = 65
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          13.229166666666670000
+          15.875000000000000000
+          171.979166666666700000)
+        XLColumn = 0
+        Alignment = taCenter
+        AlignToBand = False
+        Caption = 'Impress'#227'o:'
+        Color = clWhite
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 10
+      end
+    end
+    object QRBand7: TQRBand
+      Left = 38
+      Top = 38
+      Width = 718
+      Height = 0
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        0.000000000000000000
+        1899.708333333333000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbPageHeader
+      object QRShape6: TQRShape
+        Left = 0
+        Top = 0
+        Width = 716
+        Height = 1
+        Size.Values = (
+          2.645833333333333000
+          0.000000000000000000
+          0.000000000000000000
+          1894.416666666667000000)
+        XLColumn = 0
+        Shape = qrsRectangle
+        VertAdjust = 0
+      end
+      object QRShape7: TQRShape
+        Left = 0
+        Top = 80
+        Width = 718
+        Height = 1
+        Size.Values = (
+          2.645833333333333000
+          0.000000000000000000
+          211.666666666666700000
+          1899.708333333333000000)
+        XLColumn = 0
+        Shape = qrsRectangle
+        VertAdjust = 0
+      end
+    end
+    object QRGroup2: TQRGroup
+      Left = 38
+      Top = 154
+      Width = 718
+      Height = 7
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        18.520833333333330000
+        1899.708333333333000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      Expression = 'qryRel.ID_TERMOCONSENTIMENTO'
+      FooterBand = QRBand9
+      Master = RelMaiorIdade
+      ReprintOnNewPage = False
+    end
+    object QRBand8: TQRBand
+      Left = 38
+      Top = 161
+      Width = 718
+      Height = 584
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        1545.166666666667000000
+        1899.708333333333000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbDetail
+      object QRMemo2: TQRMemo
+        Left = 8
+        Top = 6
+        Width = 713
+        Height = 579
+        Size.Values = (
+          1531.937500000000000000
+          21.166666666666670000
+          15.875000000000000000
+          1886.479166666667000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        Lines.Strings = (
+          
+            '           Pelo presente instrumento, eu, ____________________, ' +
+            'declaro que '
+          
+            'fui suficientemente esclarecido(a) pelo cirurgi'#227'o dentista _____' +
+            '___________, '
+          
+            'registrado no CRO-PR sob n'#186' 123456789012345, sobre os procedimen' +
+            'tos'
+          
+            'cl'#237'nicos necess'#225'rios que serei submetido, bem como do diagn'#243'stic' +
+            'o, progn'#243'stico, '
+          'proserva'#231#227'o, riscos e objetivos do tratamento odontol'#243'gico. '
+          
+            '           Declaro tamb'#233'm que fui informado(a) de todos os cuida' +
+            'dos e '
+          
+            'orienta'#231#245'es que devo seguir a fim de alcan'#231'ar os melhores result' +
+            'ados na '
+          
+            'manuten'#231#227'o da sa'#250'de bucal. Estou ciente que o tratamento n'#227'o se ' +
+            'limita apenas '
+          
+            'aos procedimentos realizados, sendo que deverei retornar ao cons' +
+            'ult'#243'rio nos '
+          
+            'dias determinados pelo cirurgi'#227'o dentista, bem como inform'#225'-lo i' +
+            'mediatamente '
+          
+            'sobre poss'#237'veis altera'#231#245'es e/ou problemas que porventura possam ' +
+            'surgir. '
+          
+            '           Se qualquer condi'#231#227'o n'#227'o prevista ocorrer durante os ' +
+            'procedimentos, '
+          
+            'confio no julgamento do profissional para altera'#231#245'es no plano de' +
+            ' tratamento. Eu '
+          'solicito e autorizo fazer o que for aconselhado. '
+          
+            '           Tive a oportunidade de discutir com o profissional o ' +
+            'hist'#243'rico m'#233'dicoodontol'#243'gico, tendo preenchido uma ficha de anam' +
+            'nese.'
+          
+            ' Concordo em cooperar completamente com as recomenda'#231#245'es supraci' +
+            'tadas '
+          
+            'enquanto estiver sob seus cuidados, e entendo que qualquer falta' +
+            ' de colabora'#231#227'o'
+          
+            ' pode resultar em diminui'#231#227'o ou aus'#234'ncia dos resultados esperado' +
+            's. '
+          
+            '           Certifico que tive oportunidade de ler e entender com' +
+            'pletamente os '
+          
+            'termos e palavras contidos no texto acima, e que me foram dadas ' +
+            'explica'#231#245'es '
+          
+            'referentes a ele, e manifesto expressamente minha concord'#226'ncia e' +
+            ' meu '
+          'consentimento para realiza'#231#227'o do tratamento odontol'#243'gico.')
+        ParentFont = False
+        Transparent = False
+        FullJustify = False
+        MaxBreakChars = 0
+        FontSize = 14
+      end
+      object lblPessoaMaior: TQRLabel
+        Left = 324
+        Top = 6
+        Width = 228
+        Height = 23
+        Size.Values = (
+          60.854166666666670000
+          857.250000000000000000
+          15.875000000000000000
+          603.250000000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        Caption = 'Seu nome 1234,'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 14
+      end
+      object lblDentista: TQRLabel
+        Left = 486
+        Top = 28
+        Width = 202
+        Height = 23
+        Size.Values = (
+          60.854166666666670000
+          1285.875000000000000000
+          74.083333333333330000
+          534.458333333333300000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        Caption = 'Nome do Dentista,'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 14
+      end
+      object lblCRO: TQRLabel
+        Left = 125
+        Top = 50
+        Width = 309
+        Height = 23
+        Size.Values = (
+          60.854166666666670000
+          330.729166666666700000
+          132.291666666666700000
+          817.562500000000000000)
+        XLColumn = 0
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        Caption = 'CRO-PR sob n'#186' 12345678,'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 14
+      end
+    end
+    object QRBand9: TQRBand
+      Left = 38
+      Top = 745
+      Width = 718
+      Height = 145
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        383.645833333333300000
+        1899.708333333333000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbGroupFooter
+      object QRShape9: TQRShape
+        Left = 374
+        Top = 88
+        Width = 314
+        Height = 1
+        Size.Values = (
+          2.645833333333333000
+          989.541666666666700000
+          232.833333333333300000
+          830.791666666666700000)
+        XLColumn = 0
+        Shape = qrsRectangle
+        VertAdjust = 0
+      end
+      object lblLocalMaior: TQRLabel
+        Left = 374
+        Top = 24
+        Width = 339
+        Height = 23
+        Size.Values = (
+          60.854166666666670000
+          989.541666666666700000
+          63.500000000000000000
+          896.937500000000000000)
+        XLColumn = 0
+        Alignment = taRightJustify
+        AlignToBand = False
+        Caption = 'Pato Branco, 31 de Dezembro de 2999.'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 14
+      end
+      object lblNomePessoaMaior: TQRLabel
+        Left = 374
+        Top = 90
+        Width = 317
+        Height = 23
+        Size.Values = (
+          60.854166666666670000
+          989.541666666666700000
+          238.125000000000000000
+          838.729166666666700000)
+        XLColumn = 0
+        Alignment = taCenter
+        AlignToBand = False
+        AutoSize = False
+        Caption = 'Nome do Responsavel'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 14
+      end
+      object lblRGPessoaMaior: TQRLabel
+        Left = 374
+        Top = 109
+        Width = 317
+        Height = 23
+        Size.Values = (
+          60.854166666666670000
+          989.541666666666700000
+          288.395833333333300000
+          838.729166666666700000)
+        XLColumn = 0
+        Alignment = taCenter
+        AlignToBand = False
+        AutoSize = False
+        Caption = 'RG DO RESPONSAVEL'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FontSize = 14
+      end
+    end
+  end
+  inherited qryRel: TADOQuery
+    SQL.Strings = (
+      
+        'SELECT TERMOCONSENTIMENTO.ID_TERMOCONSENTIMENTO, UFCONSELHO, TER' +
+        'MOCONSENTIMENTO.ID_PACIENTE, TERMOCONSENTIMENTO.ID_MEDICO, TERMO' +
+        'CONSENTIMENTO.RESPONSAVEL, TERMOCONSENTIMENTO.RGRESPONSAVEL, '
+      
+        'TERMOCONSENTIMENTO.DATA, PACIENTE.NOME AS Paciente, MEDICOS.NOME' +
+        ' AS Dentista, PACIENTE.RG, PACIENTE.DTANASC, MEDICOS.CRO, DateDi' +
+        'ff(yy,PACIENTE.DTANASC, GetDate()) As Idade FROM TERMOCONSENTIME' +
+        'NTO '
+      
+        'INNER JOIN PACIENTE ON TERMOCONSENTIMENTO.ID_PACIENTE = PACIENTE' +
+        '.ID_PACIENTE '
+      
+        'INNER JOIN MEDICOS ON TERMOCONSENTIMENTO.ID_MEDICO = MEDICOS.ID_' +
+        'MEDICO')
+    object qryRelID_TERMOCONSENTIMENTO: TAutoIncField
+      FieldName = 'ID_TERMOCONSENTIMENTO'
+      ReadOnly = True
+    end
+    object qryRelID_PACIENTE: TIntegerField
+      FieldName = 'ID_PACIENTE'
+    end
+    object qryRelID_MEDICO: TIntegerField
+      FieldName = 'ID_MEDICO'
+    end
+    object qryRelRESPONSAVEL: TStringField
+      FieldName = 'RESPONSAVEL'
+      Size = 100
+    end
+    object qryRelRGRESPONSAVEL: TStringField
+      FieldName = 'RGRESPONSAVEL'
+      Size = 30
+    end
+    object qryRelDATA: TDateTimeField
+      FieldName = 'DATA'
+    end
+    object qryRelPaciente: TStringField
+      FieldName = 'Paciente'
+      Size = 255
+    end
+    object qryRelDentista: TStringField
+      FieldName = 'Dentista'
+      Size = 255
+    end
+    object qryRelRG: TStringField
+      FieldName = 'RG'
+      Size = 255
+    end
+    object qryRelDTANASC: TDateTimeField
+      FieldName = 'DTANASC'
+    end
+    object qryRelCRO: TStringField
+      FieldName = 'CRO'
+    end
+    object qryRelIdade: TIntegerField
+      FieldName = 'Idade'
+      ReadOnly = True
+    end
+    object qryRelUFCONSELHO: TStringField
+      FieldName = 'UFCONSELHO'
+      Size = 2
+    end
+  end
+  inherited SalvarPDF: TQRPDFFilter
+    Left = 992
+    Top = 400
+  end
+  object frMenor: TfrxReport
+    Version = '4.11.17'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 41326.998831631940000000
+    ReportOptions.LastChange = 41326.998831631940000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    OnGetValue = frMenorGetValue
+    Left = 368
+    Top = 48
+    Datasets = <>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object ReportTitle1: TfrxReportTitle
+        Height = 34.015770000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Memo1: TfrxMemoView
+          Align = baRight
+          Top = 4.559060000000000000
+          Width = 718.110700000000000000
+          Height = 34.015770000000000000
+          ShowHint = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Century Gothic'
+          Font.Style = [fsBold]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'TERMO DE CONSENTIMENTO INFORMADO')
+          ParentFont = False
+        end
+      end
+      object MasterData1: TfrxMasterData
+        Height = 850.394250000000000000
+        Top = 113.385900000000000000
+        Width = 718.110700000000000000
+        RowCount = 0
+        object Memo4: TfrxMemoView
+          Width = 718.110700000000000000
+          Height = 702.992580000000000000
+          ShowHint = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Century Gothic'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8W = (
+            
+              '           Pelo presente instrumento, eu, [RESPONSAVEL], infra-a' +
+              'ssinado (a) na qualidade de respons'#225'vel legal do (a) menor [PACI' +
+              'ENTE], declaro que fui suficientemente esclarecido (a) pelo ciru' +
+              'rgi'#227'o dentista [DENTISTA], registrado no CRO-[UFCRO] sob n'#186' [NUM' +
+              'EROCRO], sobre os procedimentos cl'#237'nicos necess'#225'rios a que o (a)' +
+              ' menor ser'#225' submetido, bem como do diagn'#243'stico, progn'#243'stico, pro' +
+              'serva'#231#227'o, riscos e objetivos do tratamento odontol'#243'gico. '
+            ''
+            
+              '           Declaro tamb'#233'm que fui informado (a) de todos os cuid' +
+              'ados e orienta'#231#245'es que devo seguir a fim de alcan'#231'ar os melhores' +
+              ' resultados na manuten'#231#227'o da sa'#250'de bucal. Estou ciente que o tra' +
+              'tamento n'#227'o se limita apenas aos procedimentos realizados, sendo' +
+              ' que deverei retornar ao consult'#243'rio nos dias determinados pelo ' +
+              'cirurgi'#227'o dentista, bem como inform'#225'-lo imediatamente sobre poss' +
+              #237'veis altera'#231#245'es e/ou problemas que porventura possam surgir. '
+            ''
+            
+              '           Se qualquer condi'#231#227'o n'#227'o prevista ocorrer durante os ' +
+              'procedimentos, confio no julgamento do profissional para altera'#231 +
+              #245'es no plano de tratamento. Eu solicito e autorizo fazer o que f' +
+              'or aconselhado. '
+            ''
+            
+              '           Tive a oportunidade de discutir com o profissional o ' +
+              'hist'#243'rico m'#233'dico odontol'#243'gico, tendo preenchido uma ficha de ana' +
+              'mnese.'
+            
+              'Concordo em cooperar completamente com as recomenda'#231#245'es supracit' +
+              'adas enquanto estiver sob seus cuidados, e entendo que qualquer ' +
+              'falta de colabora'#231#227'o pode resultar em diminui'#231#227'o ou aus'#234'ncia dos' +
+              ' resultados esperados. '
+            ''
+            
+              '           Certifico que tive oportunidade de ler e entender com' +
+              'pletamente os termos e palavras contidos no texto acima, e que m' +
+              'e foram dadas explica'#231#245'es referentes a ele, e manifesto expressa' +
+              'mente minha concord'#226'ncia e meu consentimento para realiza'#231#227'o do ' +
+              'tratamento odontol'#243'gico.'
+            '')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        Height = 22.677180000000000000
+        Top = 1024.252630000000000000
+        Width = 718.110700000000000000
+        object Memo2: TfrxMemoView
+          Left = 495.882190000000000000
+          Top = 1.000000000000000000
+          Width = 219.212740000000000000
+          Height = 15.118120000000000000
+          ShowHint = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'OdontoSis - www.odontosis.com.br')
+          ParentFont = False
+        end
+        object SysMemo1: TfrxSysMemoView
+          Top = 1.779530000000000000
+          Width = 718.110700000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[PAGE#]')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          Left = -15.118120000000000000
+          Width = 105.826840000000000000
+          Height = 22.677180000000000000
+          ShowHint = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Impress'#227'o: ')
+          ParentFont = False
+        end
+        object SysMemo2: TfrxSysMemoView
+          Left = 68.031540000000000000
+          Width = 45.354360000000000000
+          Height = 22.677180000000000000
+          ShowHint = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[DATE]')
+          ParentFont = False
+        end
+        object SysMemo3: TfrxSysMemoView
+          Left = 113.385900000000000000
+          Width = 64.252010000000000000
+          Height = 22.677180000000000000
+          ShowHint = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[TIME]')
+          ParentFont = False
+        end
+      end
+    end
+  end
+  object a: TfrxReport
+    Version = '4.11.17'
+    DotMatrixReport = False
+    EngineOptions.MaxMemSize = 10000000
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 38006.786384259300000000
+    ReportOptions.LastChange = 38007.009173263900000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    OnGetValue = aGetValue
+    Left = 20
+    Top = 28
+    Datasets = <>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object ReportTitle1: TfrxReportTitle
+        Height = 30.236240000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        Stretched = True
+        object Memo3: TfrxMemoView
+          Top = 6.000000000000000000
+          Width = 718.110700000000000000
+          Height = 30.236240000000000000
+          ShowHint = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Century Gothic'
+          Font.Style = [fsBold]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'TERMO DE CONSENTIMENTO INFORMADO')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        Height = 22.677180000000000000
+        Top = 1028.032160000000000000
+        Width = 718.110700000000000000
+        object Memo1: TfrxMemoView
+          Left = 306.041142530000000000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Page#]')
+        end
+        object Memo2: TfrxMemoView
+          Left = 574.488560000000000000
+          Top = 3.779530000000000000
+          Width = 139.842610000000000000
+          Height = 15.118120000000000000
+          ShowHint = False
+          Memo.UTF8W = (
+            'www.odontosis.com.br')
+        end
+        object Memo6: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 241.889920000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Memo.UTF8W = (
+            'Impress'#227'o: [<Date><Time>]')
+        end
+      end
+      object MasterData1: TfrxMasterData
+        Height = 857.953310000000000000
+        Top = 109.606370000000000000
+        Width = 718.110700000000000000
+        AllowSplit = True
+        RowCount = 1
+        Stretched = True
+        object Memo4: TfrxMemoView
+          Left = -3.779530000000000000
+          Top = 18.897650000000000000
+          Width = 718.110700000000000000
+          Height = 702.992580000000000000
+          ShowHint = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'Century Gothic'
+          Font.Style = []
+          HAlign = haBlock
+          Memo.UTF8W = (
+            
+              '           Pelo presente instrumento, eu, [RESPONSAVEL], infra-a' +
+              'ssinado (a) na qualidade de respons'#225'vel legal do (a) menor [PACI' +
+              'ENTE], declaro que fui suficientemente esclarecido (a) pelo ciru' +
+              'rgi'#227'o dentista [DENTISTA], registrado no CRO-[UFCRO] sob n'#186' [NUM' +
+              'EROCRO], sobre os procedimentos cl'#237'nicos necess'#225'rios a que o (a)' +
+              ' menor ser'#225' submetido, bem como do diagn'#243'stico, progn'#243'stico, pro' +
+              'serva'#231#227'o, riscos e objetivos do tratamento odontol'#243'gico. '
+            ''
+            
+              '           Declaro tamb'#233'm que fui informado (a) de todos os cuid' +
+              'ados e orienta'#231#245'es que devo seguir a fim de alcan'#231'ar os melhores' +
+              ' resultados na manuten'#231#227'o da sa'#250'de bucal. Estou ciente que o tra' +
+              'tamento n'#227'o se limita apenas aos procedimentos realizados, sendo' +
+              ' que deverei retornar ao consult'#243'rio nos dias determinados pelo ' +
+              'cirurgi'#227'o dentista, bem como inform'#225'-lo imediatamente sobre poss' +
+              #237'veis altera'#231#245'es e/ou problemas que porventura possam surgir. '
+            ''
+            
+              '           Se qualquer condi'#231#227'o n'#227'o prevista ocorrer durante os ' +
+              'procedimentos, confio no julgamento do profissional para altera'#231 +
+              #245'es no plano de tratamento. Eu solicito e autorizo fazer o que f' +
+              'or aconselhado. '
+            ''
+            
+              '           Tive a oportunidade de discutir com o profissional o ' +
+              'hist'#243'rico m'#233'dico odontol'#243'gico, tendo preenchido uma ficha de ana' +
+              'mnese.'
+            
+              'Concordo em cooperar completamente com as recomenda'#231#245'es supracit' +
+              'adas enquanto estiver sob seus cuidados, e entendo que qualquer ' +
+              'falta de colabora'#231#227'o pode resultar em diminui'#231#227'o ou aus'#234'ncia dos' +
+              ' resultados esperados. '
+            ''
+            
+              '           Certifico que tive oportunidade de ler e entender com' +
+              'pletamente os termos e palavras contidos no texto acima, e que m' +
+              'e foram dadas explica'#231#245'es referentes a ele, e manifesto expressa' +
+              'mente minha concord'#226'ncia e meu consentimento para realiza'#231#227'o do ' +
+              'tratamento odontol'#243'gico.')
+          ParentFont = False
+        end
+        object Line1: TfrxLineView
+          Left = 378.275820000000000000
+          Top = 788.228820000000000000
+          Width = 309.921460000000000000
+          ShowHint = False
+          Frame.Typ = [ftTop]
+        end
+        object Memo5: TfrxMemoView
+          Align = baRight
+          Left = 355.275820000000000000
+          Top = 721.874460000000000000
+          Width = 362.834880000000000000
+          Height = 26.456710000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'century Gothic'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[CIDADE], [DATAEHORA]')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 377.953000000000000000
+          Top = 790.685530000000000000
+          Width = 309.921460000000000000
+          Height = 22.677180000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'century Gothic'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[RESPONSAVEL]')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 377.953000000000000000
+          Top = 812.244590000000000000
+          Width = 309.921460000000000000
+          Height = 22.677180000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -19
+          Font.Name = 'century Gothic'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[RGRESPONSAVEL]')
+          ParentFont = False
+        end
+      end
+    end
+  end
+end

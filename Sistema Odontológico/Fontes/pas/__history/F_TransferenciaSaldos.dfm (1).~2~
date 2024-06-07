@@ -1,0 +1,95 @@
+inherited frmTransferenciaSaldos: TfrmTransferenciaSaldos
+  ClientHeight = 315
+  ClientWidth = 584
+  ExplicitWidth = 590
+  ExplicitHeight = 339
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 584
+    Caption = 'Transfer'#234'ncia de Saldos'
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 291
+    Width = 584
+  end
+  object GroupBox1: TGroupBox [2]
+    Left = 0
+    Top = 33
+    Width = 584
+    Height = 72
+    Align = alTop
+    TabOrder = 2
+    object Label1: TLabel
+      Left = 19
+      Top = 11
+      Width = 70
+      Height = 13
+      Caption = 'Conta Origem:'
+    end
+    object Label2: TLabel
+      Left = 12
+      Top = 38
+      Width = 77
+      Height = 13
+      Caption = 'Saldo da Conta:'
+    end
+    object Label3: TLabel
+      Left = 283
+      Top = 11
+      Width = 72
+      Height = 13
+      Caption = 'Conta Destino:'
+    end
+    object Label4: TLabel
+      Left = 243
+      Top = 38
+      Width = 112
+      Height = 13
+      Caption = 'Valor de Transfer'#234'ncia:'
+    end
+    object cmbContaOrigem: TComboBox
+      Left = 96
+      Top = 8
+      Width = 153
+      Height = 21
+      Style = csDropDownList
+      TabOrder = 0
+    end
+    object ComboBox1: TComboBox
+      Left = 362
+      Top = 8
+      Width = 153
+      Height = 21
+      Style = csDropDownList
+      TabOrder = 1
+    end
+    object EdtVlrPago: TcxCurrencyEdit
+      Left = 96
+      Top = 35
+      EditValue = 0.000000000000000000
+      ParentFont = False
+      Properties.ReadOnly = True
+      Style.Color = clGradientInactiveCaption
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clNavy
+      Style.Font.Height = -11
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
+      Style.IsFontAssigned = True
+      TabOrder = 2
+      Width = 96
+    end
+  end
+  inherited Enter: TJvEnterAsTab
+    Left = 96
+    Top = 65520
+  end
+  object qryAux: TADOQuery
+    Connection = DM.Conexao
+    CursorType = ctStatic
+    Parameters = <>
+    Left = 304
+    Top = 65512
+  end
+end

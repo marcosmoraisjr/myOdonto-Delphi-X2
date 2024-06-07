@@ -1,0 +1,26 @@
+unit C_SMS;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, Vcl.Menus,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, JvComponentBase, JvEnterTab,
+  Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmCadSMS = class(TfrmPadrao)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadSMS: TfrmCadSMS;
+
+implementation
+
+{$R *.dfm}
+
+end.

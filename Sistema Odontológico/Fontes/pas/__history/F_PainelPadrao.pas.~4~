@@ -1,0 +1,57 @@
+unit F_PainelPadrao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Data.DB,
+  Data.Win.ADODB, QRPDFFilt, QRCtrls, QuickRpt, Vcl.ExtCtrls;
+
+type
+  TfrmPainelPadrao = class(TForm)
+    GroupBox1: TGroupBox;
+    btnImprimir: TSpeedButton;
+    qryAux: TADOQuery;
+    Relatorio: TQuickRep;
+    QRBand1: TQRBand;
+    QRSysData1: TQRSysData;
+    lblRua: TQRLabel;
+    lblCidade: TQRLabel;
+    lbltelefone: TQRLabel;
+    lblEmail: TQRLabel;
+    lblRazao: TQRLabel;
+    lblEmpresa: TQRLabel;
+    LogoEmpresa: TQRImage;
+    QRShape12: TQRShape;
+    QRShape5: TQRShape;
+    QRBand3: TQRBand;
+    QRLabel1: TQRLabel;
+    QRSysData3: TQRSysData;
+    QRSysData2: TQRSysData;
+    QRLabel2: TQRLabel;
+    QRBand2: TQRBand;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
+    SalvarPDF: TQRPDFFilter;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPainelPadrao: TfrmPainelPadrao;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmPainelPadrao.FormCreate(Sender: TObject);
+begin
+  Self.Height := 487;
+  Self.Width  := 605;
+  Relatorio.Visible := False;
+end;
+
+end.

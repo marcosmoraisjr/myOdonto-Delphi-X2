@@ -1,0 +1,26 @@
+inherited frmReforcoCaixa: TfrmReforcoCaixa
+  ClientHeight = 369
+  ClientWidth = 459
+  ExplicitWidth = 465
+  ExplicitHeight = 393
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 459
+    Caption = 'Refor'#231'o Caixa'
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 345
+    Width = 459
+  end
+  inherited Enter: TJvEnterAsTab
+    Left = 96
+    Top = 65528
+  end
+  object qryAux: TADOQuery
+    Connection = DM.Conexao
+    Parameters = <>
+    Left = 336
+    Top = 65520
+  end
+end

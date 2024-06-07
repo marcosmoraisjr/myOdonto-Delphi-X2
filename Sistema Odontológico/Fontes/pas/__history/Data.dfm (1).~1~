@@ -1,0 +1,39 @@
+inherited frmData: TfrmData
+  ClientWidth = 328
+  ExplicitWidth = 334
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited btnSalvar: TSpeedButton
+    Left = 248
+    Top = 43
+    ExplicitLeft = 248
+    ExplicitTop = 43
+  end
+  inherited Panel1: TPanel
+    Width = 328
+    ExplicitWidth = 328
+  end
+  inherited StatusBar1: TStatusBar
+    Width = 328
+    ExplicitWidth = 328
+  end
+  inherited EdtDescricao: TEdit
+    Left = 84
+    Top = 135
+    ExplicitLeft = 84
+    ExplicitTop = 135
+  end
+  object EdtData: TJvDateEdit [4]
+    Left = 114
+    Top = 49
+    Width = 97
+    Height = 21
+    DefaultToday = True
+    DialogTitle = 'Selecione uma Data'
+    TabOrder = 3
+  end
+  inherited Enter: TJvEnterAsTab
+    Left = 88
+    Top = 65528
+  end
+end

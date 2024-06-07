@@ -1,0 +1,208 @@
+unit F_Parcelamento;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
+  dxSkinsDefaultPainters, Vcl.StdCtrls, Vcl.Mask, JvExMask, JvToolEdit,
+  cxTextEdit, cxCurrencyEdit, JvComponentBase, JvEnterTab, Vcl.ComCtrls,
+  Vcl.ExtCtrls, Data.DB, Data.Win.ADODB, Vcl.Grids, Vcl.DBGrids, JvExDBGrids,
+  JvDBGrid, JvDBUltimGrid, Vcl.Buttons;
+
+type
+  TfrmParcelamento = class(TfrmPadrao)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    EdtValor: TcxCurrencyEdit;
+    Label2: TLabel;
+    EdtDtConta: TJvDateEdit;
+    Label3: TLabel;
+    EdtParcelas: TEdit;
+    GroupBox2: TGroupBox;
+    gridPagamento: TJvDBUltimGrid;
+    qryParcelas: TADOQuery;
+    qryParcelasDataPgto: TDateTimeField;
+    qryParcelasValor: TFloatField;
+    dsParcelas: TDataSource;
+    SpeedButton6: TSpeedButton;
+    btnFechar: TSpeedButton;
+    btnSalvar: TSpeedButton;
+    qryAux: TADOQuery;
+    procedure btnFecharClick(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure EdtParcelasExit(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    iIDContaPagar : Integer;
+    Procedure CarregaConta;
+  end;
+
+var
+  frmParcelamento: TfrmParcelamento;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmParcelamento.btnFecharClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TfrmParcelamento.btnSalvarClick(Sender: TObject);
+var
+  iIDFornecedor,
+  iSituacao  : Integer;
+  sHistorico,
+  sNroNota,
+  sDocumeto : String;
+  dDataVencimento,
+  dDataConta : TDatetime;
+  rValorJuros,
+  rValor,
+  rValorDesconto : Double;
+begin
+  inherited;
+
+  SpeedButton6Click(Self);
+
+  if qryParcelas.RecordCount < 2 then
+    Begin
+      Close;
+    End;
+
+  With qryAux do
+    Begin
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT * FROM CONTAPAGAR');
+      SQL.Add('WHERE ID_CONTAPAGAR = :pID');
+      Parameters.ParamByName('pID').Value := iIDContaPagar;
+      Open;
+
+      iIDFornecedor := FieldByName('ID_FORNECEDOR').AsInteger;
+      iSituacao := FieldByName('SITUACAO').AsInteger;
+      sHistorico := FieldByName('HISTORICO').AsString;
+      sNroNota := FieldByName('NRONOTA').AsString;
+      sDocumeto := FieldByName('DOCUMENTO').AsString;
+      dDataConta := FieldByName('DTACONTA').AsDateTime;
+
+      rValorJuros := FieldByName('VALORJUROS').AsFloat;
+      rValor := FieldByName('VALOR').AsFloat;
+      rValorDesconto := FieldByName('VALORDESCONTO').AsFloat;
+
+
+      if rValorJuros > 0 then
+         Begin
+           rValorJuros := rValorJuros / StrToFloat(EdtParcelas.Text);
+         End;
+
+      if rValor > 0 then
+        Begin
+          rValor := rValor  / StrToFloat(EdtParcelas.Text);
+        End;
+
+      if rValorDesconto > 0 then
+        Begin
+          rValorDesconto := rValorDesconto / StrToFloat(EdtParcelas.Text);
+        End;
+
+      qryParcelas.First;
+
+      while not qryParcelas.Eof do
+        Begin
+          Append;
+          FieldByName('ID_FORNECEDOR').AsInteger := iIDFornecedor;
+          FieldByName('SITUACAO').AsInteger := iSituacao;
+          FieldByName('HISTORICO').AsString := sHistorico;
+          FieldByName('NRONOTA').AsString := sNroNota;
+          FieldByName('DOCUMENTO').AsString := sDocumeto;
+          FieldByName('DTACONTA').AsDateTime := dDataConta;
+
+          FieldByName('VALORJUROS').AsFloat := rValorJuros;
+          FieldByName('VALOR').AsFloat := rValor;
+          FieldByName('VALORDESCONTO').AsFloat := rValorDesconto;
+          FieldByName('DTAVENCIMENTO').AsDateTime := qryParcelasDataPgto.AsDateTime;
+          FieldByName('VALORRESTANTE').AsFloat := qryParcelasValor.AsFloat;
+          Post;
+          qryParcelas.Next;
+        End;
+
+      Close;
+      SQL.Clear;
+      SQL.Add('DELETE FROM CONTAPAGAR');
+      SQL.Add('WHERE ID_CONTAPAGAR = :pID');
+      Parameters.ParamByName('pID').Value := iIDContaPagar;
+      ExecSQL;
+    End;
+
+    Close;
+end;
+
+procedure TfrmParcelamento.CarregaConta;
+begin
+  With qryAux do
+    Begin
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT * FROM CONTAPAGAR');
+      SQL.Add('WHERE ID_CONTAPAGAR = :pID');
+      Parameters.ParamByName('pID').Value := iIDContaPagar;
+      Open;
+
+      EdtValor.Value := FieldByName('VALORRESTANTE').AsFloat;
+      EdtDtConta.Date := FieldByName('DTAVENCIMENTO').AsDateTime;
+    End;
+end;
+
+procedure TfrmParcelamento.EdtParcelasExit(Sender: TObject);
+begin
+  inherited;
+  SpeedButton6Click(self);
+end;
+
+procedure TfrmParcelamento.FormActivate(Sender: TObject);
+begin
+  inherited;
+  SpeedButton6Click(self);
+  EdtParcelas.SetFocus;
+
+end;
+
+procedure TfrmParcelamento.SpeedButton6Click(Sender: TObject);
+var
+  i : integer;
+  dDataVcto : TDate;
+  rValor : Double;
+begin
+  inherited;
+
+  i := 0;
+  dDataVcto := EdtDtConta.Date;
+
+  With qryParcelas do
+    Begin
+      Close;
+      Open;
+
+      rValor := EdtValor.Value / StrToFloat(EdtParcelas.Text);
+
+      for i := 1 to StrToInt(EdtParcelas.Text) do
+        Begin
+          Append;
+          FieldByName('DataPgto').AsDateTime := dDataVcto;
+          FieldByName('Valor').AsFloat := rValor;
+          Post;
+
+          dDataVcto := IncMonth(dDataVcto, 1);
+        End;
+    End;
+end;
+
+end.

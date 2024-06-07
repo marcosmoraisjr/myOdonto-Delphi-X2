@@ -1,0 +1,74 @@
+unit R_Padrao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, QuickRpt, Vcl.ExtCtrls, Funcoes,
+  QRCtrls,
+  Data.DB, Data.Win.ADODB, QRPDFFilt;
+
+type
+  TfrmRelatorioPadrao = class(TForm)
+    Relatorio: TQuickRep;
+    QRBand1: TQRBand;
+    QRSysData1: TQRSysData;
+    qryRel: TADOQuery;
+    QRBand3: TQRBand;
+    QRLabel1: TQRLabel;
+    QRSysData3: TQRSysData;
+    QRSysData2: TQRSysData;
+    qryAux: TADOQuery;
+    QRLabel2: TQRLabel;
+    QRBand2: TQRBand;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
+    lblRua: TQRLabel;
+    lblCidade: TQRLabel;
+    lbltelefone: TQRLabel;
+    lblEmail: TQRLabel;
+    lblRazao: TQRLabel;
+    lblEmpresa: TQRLabel;
+    LogoEmpresa: TQRImage;
+    QRShape12: TQRShape;
+    QRShape5: TQRShape;
+    SalvarPDF: TQRPDFFilter;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmRelatorioPadrao: TfrmRelatorioPadrao;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmRelatorioPadrao.FormCreate(Sender: TObject);
+begin
+  if FileExists(PastaArquivo + '\Logo.Jpg') then
+  Begin
+    LogoEmpresa.Picture.LoadFromFile(PastaArquivo + '\Logo.jpg');
+  End;
+
+  lblEmpresa.Caption := Empresa.Nome;
+  lblRazao.Caption := Empresa.RazaoSocial;
+  lblRua.Caption := Empresa.Endereco + ', ' + Empresa.Numero + ' - ' +
+    Empresa.Bairro;
+  lblCidade.Caption := Empresa.Cidade + ' - ' + Empresa.UF + ' - CEP: ' +
+    Empresa.CEP;
+  lbltelefone.Caption := 'Telefone: ' + Empresa.Telefone;
+
+  if Empresa.Fax <> '(  )     -    ' then
+  Begin
+    lbltelefone.Caption := lbltelefone.Caption + ' Fax: ' + Empresa.Fax;
+  End;
+
+  lblEmail.Caption := 'e-mail: ' + Empresa.Email;
+end;
+
+end.

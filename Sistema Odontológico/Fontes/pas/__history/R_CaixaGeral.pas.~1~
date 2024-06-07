@@ -1,0 +1,25 @@
+unit R_CaixaGeral;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, JvComponentBase, JvEnterTab,
+  Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmRelCaixaGeral = class(TfrmPadrao)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmRelCaixaGeral: TfrmRelCaixaGeral;
+
+implementation
+
+{$R *.dfm}
+
+end.

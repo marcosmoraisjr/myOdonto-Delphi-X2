@@ -1,0 +1,8 @@
+inherited frmPesquisaConsultorio: TfrmPesquisaConsultorio
+  ExplicitTop = 8
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Caption = 'Lista de Consult'#243'rios'
+  end
+end

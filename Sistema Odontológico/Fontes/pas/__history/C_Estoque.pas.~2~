@@ -1,0 +1,51 @@
+unit C_Estoque;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, cxGraphics, cxLookAndFeels,
+  cxLookAndFeelPainters, Menus, dxSkinsCore, dxSkinsDefaultPainters, cxControls,
+  cxContainer, cxEdit, cxTextEdit, cxCurrencyEdit, Vcl.Mask, JvExMask,
+  JvToolEdit, Vcl.StdCtrls, cxButtons, Vcl.PlatformDefaultStyleActnCtrls,
+  Vcl.ActnPopup, JvComponentBase, JvEnterTab, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmCMateriais = class(TfrmPadrao)
+    GroupBox1: TGroupBox;
+    btnSalvar: TcxButton;
+    btnFechar: TcxButton;
+    Label1: TLabel;
+    EdtDescricao: TEdit;
+    Label2: TLabel;
+    EdtReferencia: TEdit;
+    Label3: TLabel;
+    EdtUnidade: TEdit;
+    Label4: TLabel;
+    EdtCodGrupo: TJvComboEdit;
+    EdtGrupo: TEdit;
+    Label5: TLabel;
+    EdtValorCompra: TcxCurrencyEdit;
+    Label6: TLabel;
+    EdtEstoqueMinimo: TEdit;
+    procedure btnFecharClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCMateriais: TfrmCMateriais;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmCMateriais.btnFecharClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+end.

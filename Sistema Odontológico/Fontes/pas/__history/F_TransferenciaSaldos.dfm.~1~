@@ -1,0 +1,26 @@
+inherited frmTransferenciaSaldos: TfrmTransferenciaSaldos
+  ClientHeight = 315
+  ClientWidth = 692
+  ExplicitWidth = 698
+  ExplicitHeight = 339
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 692
+    Caption = 'Transfer'#234'ncia de Saldos'
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 291
+    Width = 692
+  end
+  inherited Enter: TJvEnterAsTab
+    Left = 72
+    Top = 0
+  end
+  object qryAux: TADOQuery
+    Connection = DM.Conexao
+    CursorType = ctStatic
+    Parameters = <>
+    Left = 304
+  end
+end

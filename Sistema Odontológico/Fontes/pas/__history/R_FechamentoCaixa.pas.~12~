@@ -1,0 +1,106 @@
+unit R_FechamentoCaixa;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, JvComponentBase, JvEnterTab,
+  Vcl.ComCtrls, Vcl.ExtCtrls, QRPDFFilt, QRCtrls, QuickRpt, Data.DB,
+  Data.Win.ADODB;
+
+type
+  TfrmRelFechamentoCaixa = class(TfrmPadrao)
+    relPrevia: TQuickRep;
+    QRBand6: TQRBand;
+    QRLabel11: TQRLabel;
+    QRSysData5: TQRSysData;
+    QRSysData6: TQRSysData;
+    QRLabel12: TQRLabel;
+    QRBand7: TQRBand;
+    QRShape6: TQRShape;
+    QRShape7: TQRShape;
+    QRBand1: TQRBand;
+    SalvarPDF: TQRPDFFilter;
+    QRLabel4: TQRLabel;
+    QRGroup1: TQRGroup;
+    QRLabel13: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRBand4: TQRBand;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRBand5: TQRBand;
+    QRLabel14: TQRLabel;
+    lblTDiferença: TQRLabel;
+    lblTInformado: TQRLabel;
+    lblTSaques: TQRLabel;
+    lblTReforço: TQRLabel;
+    lblTSaidas: TQRLabel;
+    lblTEntradas: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRLabel22: TQRLabel;
+    QRLabel23: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRLabel25: TQRLabel;
+    LblTotalEntrada: TQRLabel;
+    lblTotalSaida: TQRLabel;
+    lblTotalCaixa: TQRLabel;
+    lblTotalInformado: TQRLabel;
+    lblTotalDiferença: TQRLabel;
+    qryRel: TADOQuery;
+    qryRelID_EMPRESA: TAutoIncField;
+    qryRelID_FILIAL: TIntegerField;
+    qryRelID_CIDADE: TIntegerField;
+    qryRelNOME: TStringField;
+    qryRelRAZAOSOCIAL: TStringField;
+    qryRelENDERECO: TStringField;
+    qryRelNUMERO: TStringField;
+    qryRelBAIRRO: TStringField;
+    qryRelCEP: TStringField;
+    qryRelTELEFONE: TStringField;
+    qryRelFAX: TStringField;
+    qryRelCONTATO: TStringField;
+    qryRelCNPJ: TStringField;
+    qryRelIE: TStringField;
+    qryRelEMAIL: TStringField;
+    Rels: TQRCompositeReport;
+    Cabecalho: TQuickRep;
+    QRBand3: TQRBand;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
+    QRBand8: TQRBand;
+    QRSysData4: TQRSysData;
+    QRLabel17: TQRLabel;
+    QRLabel18: TQRLabel;
+    QRLabel19: TQRLabel;
+    procedure RelsAddReports(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmRelFechamentoCaixa: TfrmRelFechamentoCaixa;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmRelFechamentoCaixa.RelsAddReports(Sender: TObject);
+begin
+  inherited;
+  Rels.Reports.Add(QuickRep1);
+  Rels.Reports.Add(relPrevia);
+end;
+
+end.

@@ -1,0 +1,44 @@
+inherited frmBancosPadrao: TfrmBancosPadrao
+  ExplicitTop = 8
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited gLista: TJvDBGrid
+    TitleButtons = True
+    OnTitleBtnClick = gListaTitleBtnClick
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'CODIGO'
+        Title.Caption = 'Codigo'
+        Width = 79
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOME'
+        Title.Caption = 'Nome'
+        Width = 258
+        Visible = True
+      end>
+  end
+  inherited Panel1: TPanel
+    Caption = 'Bancos Padr'#227'o'
+  end
+  inherited gbNome: TGroupBox
+    inherited EdtLoc: TJvDBSearchEdit
+      DataField = 'CODIGO'
+    end
+  end
+  inherited qryPesquisa: TADOQuery
+    SQL.Strings = (
+      'SELECT * FROM BANCOSPADRAO')
+    object qryPesquisaCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 255
+    end
+    object qryPesquisaNOME: TStringField
+      FieldName = 'NOME'
+      Size = 255
+    end
+  end
+end

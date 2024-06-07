@@ -1,0 +1,221 @@
+unit R_TermoConsentimento;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, R_Padrao, QRPDFFilt, Data.DB,
+  Data.Win.ADODB, QRCtrls, QuickRpt, Vcl.ExtCtrls, Funcoes, frxClass;
+
+type
+  TfrmRelTermoConsentimento = class(TfrmRelatorioPadrao)
+    QRGroup1: TQRGroup;
+    qryRelID_TERMOCONSENTIMENTO: TAutoIncField;
+    qryRelID_PACIENTE: TIntegerField;
+    qryRelID_MEDICO: TIntegerField;
+    qryRelRESPONSAVEL: TStringField;
+    qryRelRGRESPONSAVEL: TStringField;
+    qryRelDATA: TDateTimeField;
+    qryRelPaciente: TStringField;
+    qryRelDentista: TStringField;
+    qryRelRG: TStringField;
+    qryRelDTANASC: TDateTimeField;
+    qryRelCRO: TStringField;
+    qryRelIdade: TIntegerField;
+    QRBand4: TQRBand;
+    QRMemo1: TQRMemo;
+    lblNomeRM: TQRLabel;
+    lblNomeMenor: TQRLabel;
+    lblNomeDentistaM: TQRLabel;
+    lblCROMENOR: TQRLabel;
+    QRBand10: TQRBand;
+    QRShape8: TQRShape;
+    lblLocalMenor: TQRLabel;
+    lblRespAssM: TQRLabel;
+    lblRespRGM: TQRLabel;
+    RelMaiorIdade: TQuickRep;
+    QRBand5: TQRBand;
+    QRSysData4: TQRSysData;
+    lblRuaCab: TQRLabel;
+    lblCidadeCab: TQRLabel;
+    lblTelefoneCab: TQRLabel;
+    lblEmailCab: TQRLabel;
+    lblRazaoCab: TQRLabel;
+    lblEmpresaCab: TQRLabel;
+    LogoEmpresaCab: TQRImage;
+    QRShape3: TQRShape;
+    QRShape4: TQRShape;
+    QRBand6: TQRBand;
+    QRLabel11: TQRLabel;
+    QRSysData5: TQRSysData;
+    QRSysData6: TQRSysData;
+    QRLabel12: TQRLabel;
+    QRBand7: TQRBand;
+    QRShape6: TQRShape;
+    QRShape7: TQRShape;
+    QRGroup2: TQRGroup;
+    QRBand8: TQRBand;
+    QRMemo2: TQRMemo;
+    lblPessoaMaior: TQRLabel;
+    lblDentista: TQRLabel;
+    lblCRO: TQRLabel;
+    QRBand9: TQRBand;
+    QRShape9: TQRShape;
+    lblLocalMaior: TQRLabel;
+    lblNomePessoaMaior: TQRLabel;
+    lblRGPessoaMaior: TQRLabel;
+    qryRelUFCONSELHO: TStringField;
+    frMenor: TfrxReport;
+    frxReport1: TfrxReport;
+    procedure FormCreate(Sender: TObject);
+    procedure frMenorGetValue(const VarName: string; var Value: Variant);
+    procedure frxReport1GetValue(const VarName: string; var Value: Variant);
+  private
+    { Private declarations }
+  public
+    sNomePaciente,
+    sNomeResponsavel,
+    sUFCRO,
+    sDentista : String;
+    Procedure CarregaTermos(ID: Integer);
+  end;
+
+var
+  frmRelTermoConsentimento: TfrmRelTermoConsentimento;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmRelTermoConsentimento.CarregaTermos(ID: Integer);
+var
+  Ano, Mes, Dia: Word;
+  i: Integer;
+begin
+
+  With qryRel do
+  Begin
+    CLose;
+    SQL.Clear;
+    SQL.Add('SELECT TERMOCONSENTIMENTO.ID_TERMOCONSENTIMENTO, UFCONSELHO,TERMOCONSENTIMENTO.ID_PACIENTE, TERMOCONSENTIMENTO.ID_MEDICO, TERMOCONSENTIMENTO.RESPONSAVEL, TERMOCONSENTIMENTO.RGRESPONSAVEL,');
+    SQL.Add('TERMOCONSENTIMENTO.DATA, PACIENTE.NOME AS Paciente, MEDICOS.NOME AS Dentista, PACIENTE.RG, PACIENTE.DTANASC, MEDICOS.CRO, DateDiff(yy,PACIENTE.DTANASC, GetDate()) As Idade FROM TERMOCONSENTIMENTO');
+    SQL.Add('INNER JOIN PACIENTE ON TERMOCONSENTIMENTO.ID_PACIENTE = PACIENTE.ID_PACIENTE');
+    SQL.Add('INNER JOIN MEDICOS ON TERMOCONSENTIMENTO.ID_MEDICO = MEDICOS.ID_MEDICO');
+    SQL.Add('WHERE TERMOCONSENTIMENTO.ID_TERMOCONSENTIMENTO = :pID');
+    Parameters.ParamByName('pID').Value := ID;
+    Open;
+
+    DecodeDate(FieldByname('DATA').AsDateTime, Ano, Mes, Dia);
+
+    if FieldByname('IDADE').AsInteger > 17 then
+    Begin
+      lblPessoaMaior.Caption := FieldByname('PACIENTE').AsString + ', ';
+      lblNomePessoaMaior.Caption := FieldByname('PACIENTE').AsString;
+      lblRGPessoaMaior.Caption := FieldByname('RG').AsString;
+      lblDentista.Caption := FieldByname('DENTISTA').AsString + ', ';
+      lblCRO.Caption := 'CRO-' + FieldByname('UFCONSELHO').AsString + ' sob nº '
+        + FieldByname('CRO').AsString;
+      lblLocalMaior.Caption := Empresa.Cidade + ', ' + IntToStr(Dia) + ' de ' +
+        FormatDateTime('MMMM', Mes) + ' de ' + IntToStr(Ano);
+      i := 0;
+    End
+    Else
+    Begin
+      lblLocalMenor.Caption := Empresa.Cidade + ', ' + IntToStr(Dia) + ' de ' +
+        FormatDateTime('MMMM', Mes) + ' de ' + IntToStr(Ano);
+      lblRespAssM.Caption := FieldByname('RESPONSAVEL').AsString;
+      lblRespRGM.Caption := FieldByname('RGRESPONSAVEL').AsString;
+      lblCROMENOR.Caption := 'CRO-' + FieldByname('UFCONSELHO').AsString +
+        ' sob nº ' + FieldByname('CRO').AsString;
+      lblNomeDentistaM.Caption := FieldByname('DENTISTA').AsString + ', ';
+      lblNomeMenor.Caption := FieldByname('PACIENTE').AsString + ', ';
+      lblNomeRM.Caption := FieldByname('RESPONSAVEL').AsString + ', ';
+      i := 1;
+    End;
+  End;
+
+  case i of
+    0:
+      Begin
+        RelMaiorIdade.Preview;
+      End;
+
+    1:
+      Begin
+        Relatorio.Preview;
+      End;
+  end;
+
+end;
+
+procedure TfrmRelTermoConsentimento.FormCreate(Sender: TObject);
+begin
+  inherited;
+  if FileExists(PastaArquivo + '\Logo.Jpg') then
+  Begin
+    LogoEmpresaCab.Picture.LoadFromFile(PastaArquivo + '\Logo.jpg');
+  End;
+
+  lblEmpresaCab.Caption := Empresa.Nome;
+  lblRazaoCab.Caption := Empresa.RazaoSocial;
+  lblRuaCab.Caption := Empresa.Endereco + ', ' + Empresa.Numero + ' - ' +
+    Empresa.Bairro;
+  lblCidadeCab.Caption := Empresa.Cidade + ' - ' + Empresa.UF + ' - CEP: ' +
+    Empresa.CEP;
+  lblTelefoneCab.Caption := 'Telefone: ' + Empresa.Telefone;
+
+  if Empresa.Fax <> '(  )     -    ' then
+  Begin
+    lblTelefoneCab.Caption := lblTelefoneCab.Caption + ' Fax: ' + Empresa.Fax;
+  End;
+
+  lblEmailCab.Caption := 'e-mail: ' + Empresa.Email;
+end;
+
+procedure TfrmRelTermoConsentimento.frMenorGetValue(const VarName: string;
+  var Value: Variant);
+begin
+  inherited;
+  if CompareText(VarName, 'RESPONSAVEL') = 0 then
+  begin
+    Value := 'João da Silva Sauro';
+  end;
+  if CompareText(VarName, 'PACIENTE') = 0 then
+  begin
+    Value := 'Pedro da Silva Sauro';
+  end;
+  if CompareText(VarName, 'DENTISTA') = 0 then
+  begin
+    Value := 'Marina Cunico Soares';
+  end;
+end;
+
+procedure TfrmRelTermoConsentimento.frxReport1GetValue(const VarName: string;
+  var Value: Variant);
+begin
+  inherited;
+  if CompareText(VarName, 'RESPONSAVEL') = 0 then
+  begin
+    Value := 'João da Silva Sauro';
+  end;
+  if CompareText(VarName, 'PACIENTE') = 0 then
+  begin
+    Value := 'Pedro da Silva Sauro';
+  end;
+  if CompareText(VarName, 'DENTISTA') = 0 then
+  begin
+    Value := 'Marina Cunico Soares';
+  end;
+  if CompareText(VarName, 'UFCRO') = 0 then
+  begin
+    Value := 'AC';
+  end;
+  if CompareText(VarName, 'NUMEROCRO') = 0 then
+  begin
+    Value := '12345678912345';
+  end;
+
+end;
+
+end.

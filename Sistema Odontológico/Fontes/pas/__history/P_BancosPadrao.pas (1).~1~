@@ -1,0 +1,47 @@
+unit P_BancosPadrao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, P_Padrao, Data.DB, JvComponentBase,
+  JvEnterTab, Data.Win.ADODB, Vcl.StdCtrls, JvExStdCtrls, JvEdit,
+  JvDBSearchEdit, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids,
+  JvExDBGrids, JvDBGrid;
+
+type
+  TfrmBancosPadrao = class(TfrmPesquisaPadrao)
+    qryPesquisaCODIGO: TStringField;
+    qryPesquisaNOME: TStringField;
+    procedure gListaCellClick(Column: TColumn);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmBancosPadrao: TfrmBancosPadrao;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmBancosPadrao.gListaCellClick(Column: TColumn);
+begin
+  inherited;
+  case Column of
+    0: Begin
+        gbNome.Caption := 'Código';
+        EdtLoc.DataField := 'CODIGO';
+    End;
+
+    1: Begin
+        gbNome.Caption := 'Nome';
+        EdtLoc.DataField := 'NOME';
+    End;
+  end;
+
+end;
+
+end.

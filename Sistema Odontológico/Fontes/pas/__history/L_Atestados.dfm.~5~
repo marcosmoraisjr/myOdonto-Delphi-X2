@@ -1,0 +1,135 @@
+inherited frmListaAtestados: TfrmListaAtestados
+  ExplicitTop = 8
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Caption = 'Atestados'
+  end
+  inherited gLista: TJvDBGrid
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID_ATESTADOS'
+        Title.Caption = 'Cod.'
+        Width = 35
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Paciente'
+        Width = 207
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Dentista'
+        Width = 188
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'FINSS'
+        Title.Caption = 'Fins'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DATA'
+        Title.Caption = 'Data'
+        Width = 73
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'HORAINI'
+        Title.Caption = 'Hor'#225'rio Consulta'
+        Visible = True
+      end>
+  end
+  inherited GroupBox1: TGroupBox
+    inherited EdtPesquisa: TJvDBSearchEdit
+      DataField = 'Paciente'
+      Text = 'Alessandro Levartoski'
+    end
+    inherited cbAtivo: TcxCheckBox
+      Visible = False
+      ExplicitHeight = 27
+    end
+  end
+  inherited btnAdicionar: TcxButton
+    OnClick = btnAdicionarClick
+  end
+  inherited Enter: TJvEnterAsTab
+    Left = 232
+    Top = 232
+  end
+  inherited qryPadrao: TADOQuery
+    Active = True
+    SQL.Strings = (
+      
+        'SELECT PACIENTE.NOME AS Paciente, MEDICOS.NOME AS Dentista, OPER' +
+        'ADORES.NOME AS Operador, ATESTADOS.ID_ATESTADOS,  ATESTADOS.OBSE' +
+        'RVACAO,'
+      
+        'ATESTADOS.ID_PACIENTE, CASE FINS WHEN 0 THEN '#39'Escolares'#39' WHEN 1 ' +
+        'THEN '#39'Trabalhistas'#39' END AS FINSS,ATESTADOS.ID_MEDICO, ATESTADOS.' +
+        'ID_OPERADOR, ATESTADOS.DATA, ATESTADOS.FINS, ATESTADOS.HORAINI, ' +
+        'ATESTADOS.HORAFIM FROM ATESTADOS '
+      
+        'INNER JOIN PACIENTE ON ATESTADOS.ID_PACIENTE = PACIENTE.ID_PACIE' +
+        'NTE '
+      'INNER JOIN MEDICOS ON ATESTADOS.ID_MEDICO = MEDICOS.ID_MEDICO '
+      
+        'INNER JOIN OPERADORES ON ATESTADOS.ID_OPERADOR = OPERADORES.ID_O' +
+        'PERADORES')
+    object qryPadraoPaciente: TStringField
+      FieldName = 'Paciente'
+      Size = 255
+    end
+    object qryPadraoDentista: TStringField
+      FieldName = 'Dentista'
+      Size = 255
+    end
+    object qryPadraoID_ATESTADOS: TAutoIncField
+      FieldName = 'ID_ATESTADOS'
+      ReadOnly = True
+    end
+    object qryPadraoDATA: TDateTimeField
+      FieldName = 'DATA'
+      DisplayFormat = 'DD/MM/YYYY'
+    end
+    object qryPadraoHORAINI: TStringField
+      FieldName = 'HORAINI'
+      Size = 10
+    end
+    object qryPadraoFINSS: TStringField
+      FieldName = 'FINSS'
+      ReadOnly = True
+      Size = 12
+    end
+    object qryPadraoOperador: TStringField
+      FieldName = 'Operador'
+      Size = 30
+    end
+    object qryPadraoOBSERVACAO: TMemoField
+      FieldName = 'OBSERVACAO'
+      BlobType = ftMemo
+    end
+    object qryPadraoID_PACIENTE: TIntegerField
+      FieldName = 'ID_PACIENTE'
+    end
+    object qryPadraoID_MEDICO: TIntegerField
+      FieldName = 'ID_MEDICO'
+    end
+    object qryPadraoID_OPERADOR: TIntegerField
+      FieldName = 'ID_OPERADOR'
+    end
+    object qryPadraoFINS: TIntegerField
+      FieldName = 'FINS'
+    end
+    object qryPadraoHORAFIM: TStringField
+      FieldName = 'HORAFIM'
+      Size = 10
+    end
+  end
+end

@@ -1,0 +1,16 @@
+inherited frmPGrupos: TfrmPGrupos
+  ExplicitTop = -149
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Caption = 'Grupos'
+    ExplicitTop = -6
+  end
+  inherited gbNome: TGroupBox
+    Caption = 'Descri'#231#227'o'
+    ExplicitTop = 421
+  end
+  inherited GroupBox1: TGroupBox
+    ExplicitTop = 469
+  end
+end

@@ -1,0 +1,74 @@
+unit F_Lembretes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, Vcl.StdCtrls, Vcl.Menus,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, JvComponentBase, JvEnterTab,
+  Vcl.ComCtrls, Vcl.ExtCtrls, cxGraphics, cxLookAndFeels, cxLookAndFeelPainters,
+  Menus, dxSkinsCore, dxSkinsDefaultPainters, cxButtons, Vcl.Mask, JvExMask,
+  JvToolEdit, Data.DB, Data.Win.ADODB, JvExStdCtrls, JvCombobox,
+  JvDBSearchComboBox;
+
+type
+  TfrmLembretes = class(TfrmPadrao)
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    Label1: TLabel;
+    EdtTitulo: TEdit;
+    Label2: TLabel;
+    EdtData: TJvDateEdit;
+    GroupBox3: TGroupBox;
+    mmoMensagem: TMemo;
+    btnSalvar: TcxButton;
+    btnFechar: TcxButton;
+    qryAux: TADOQuery;
+    qryOperadores: TADOQuery;
+    qryOperadoresNOME: TStringField;
+    qryOperadoresID_OPERADORES: TAutoIncField;
+    dsOperadores: TDataSource;
+    JvDBSearchComboBox1: TJvDBSearchComboBox;
+    procedure btnFecharClick(Sender: TObject);
+  private
+    { Private declarations }
+    iIDLembrete : Integer;
+  public
+    { Public declarations }
+    Procedure CarregaLembrete(iLembrete : Integer);
+  end;
+
+var
+  frmLembretes: TfrmLembretes;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmLembretes.btnFecharClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TfrmLembretes.CarregaLembrete(iLembrete: Integer);
+begin
+  iIDLembrete := iLembrete;
+
+  With qryAux do
+    Begin
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT * FROM LEMBRETES');
+      SQL.Add('WHERE ID_LEMBRETES = :pID');
+      Parameters.ParamByName('pID').Value := iIDLembrete;
+      Open;
+
+      EdtTitulo.Text := FieldByName('TITULO').AsString;
+      EdtData.Date := FieldByName('DATA').AsDateTime;
+      mmoMensagem.Lines.Text := FieldByName('MENSAGEM').AsString;
+
+    End;
+end;
+
+end.

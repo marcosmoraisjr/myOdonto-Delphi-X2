@@ -1,0 +1,26 @@
+unit TabelasConvenios;
+
+interface
+
+uses Windows, uDM;
+
+
+Procedure GeraTabelas(RegistroANS : String);
+
+implementation
+
+
+Procedure GeraTabelas(RegistroANS : String);
+Begin
+
+  if RegistroANS = '338648' then //Fundação Sanepar
+    Begin
+
+    End
+  Else if RegistroANS = '' then //Fundação Copel
+    Begin
+
+    End;
+End;
+
+end.

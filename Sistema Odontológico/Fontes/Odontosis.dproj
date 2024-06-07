@@ -1,0 +1,582 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{77BCD2FB-00B8-4CFF-BFFD-E916F447830B}</ProjectGuid>
+			<ProjectVersion>13.4</ProjectVersion>
+			<FrameworkType>VCL</FrameworkType>
+			<MainSource>Odontosis.dpr</MainSource>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Platform Condition="'$(Platform)'==''">Win32</Platform>
+			<TargetedPlatforms>3</TargetedPlatforms>
+			<AppType>Application</AppType>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+			<Base_Win64>true</Base_Win64>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+			<Base_Win32>true</Base_Win32>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+			<Cfg_1_Win32>true</Cfg_1_Win32>
+			<CfgParent>Cfg_1</CfgParent>
+			<Cfg_1>true</Cfg_1>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>fmx;IndySystem;DBXInterBaseDriver;DataSnapCommon;DataSnapClient;DataSnapServer;DataSnapProviderClient;DbxCommonDriver;dbxcds;DBXOracleDriver;dsnap;IndyCore;fmxase;CloudService;inetdbxpress;IPIndyImpl;bindcompfmx;rtl;dbrtl;DbxClientDriver;bindcomp;inetdb;xmlrtl;ibxpress;IndyProtocols;DBXMySQLDriver;bindengine;soaprtl;DBXInformixDriver;DBXFirebirdDriver;inet;fmxobj;DBXSybaseASADriver;fmxdae;dbexpress;DataSnapIndy10ServerTransport;$(DCC_UsePackage)</DCC_UsePackage>
+			<Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
+			<DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
+			<DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
+			<DCC_E>false</DCC_E>
+			<DCC_N>false</DCC_N>
+			<DCC_S>false</DCC_S>
+			<DCC_F>false</DCC_F>
+			<DCC_K>false</DCC_K>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win64)'!=''">
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+			<DCC_UsePackage>TeeDB;vclib;DBXSybaseASEDriver;vclimg;vcldb;vcldsnap;DBXDb2Driver;vcl;DBXMSSQLDriver;webdsnap;adortl;Tee;DBXOdbcDriver;TeeUI;vclactnband;bindcompvcl;vclie;vcltouch;websnap;VclSmp;DataSnapConnectors;dsnapcon;vclx;$(DCC_UsePackage)</DCC_UsePackage>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win32)'!=''">
+			<DCC_UsePackage>JvGlobus;cxPageControldxBarPopupMenuD16;JvMM;XPMenuz;JvManagedThreads;cxPageControlD16;dxPSdxFCLnkD16;JvDlgs;JvCrypt;TeeDB;cxBarEditItemD16;dxComnD16;dxNavBarD16;dxPSCoreD16;Rave100VCL;vclib;inetdbbde;dcldxSkinsCoreD16;cxPivotGridOLAPD16;JvNet;dxdbtrD16;JvDotNetCtrls;DBXSybaseASEDriver;dxBarDBNavD16;dxSkinsdxNavBarPainterD16;vclimg;QR5RunDXE2;dxSpellCheckerD16;fmi;cxSpreadSheetD16;dxPSDBTeeChartD16;JvXPCtrls;dxCoreD16;vcldb;dxorgcD16;vcldsnap;cxPivotGridChartD16;dxSkinscxPCPainterD16;dxRibbonD16;dxPScxExtCommonD16;cxVerticalGridD16;DBXDb2Driver;Intraweb_120_160;dxThemeD16;JvCore;vclribbon;frxe16;dxdborD16;cxTreeListdxBarPopupMenuD16;cxSchedulerGridD16;vcl;dxSkinscxSchedulerPainterD16;dxGDIPlusD16;DBXMSSQLDriver;dxPScxSSLnkD16;FmxTeeUI;dxPSdxOCLnkD16;dxPSdxDBTVLnkD16;JvAppFrm;JvDB;JvRuntimeDesign;cxLibraryD16;cxTreeListD16;webdsnap;dxBarD16;dxtrmdD16;dxPScxPivotGridLnkD16;dxPScxSchedulerLnkD16;JclDeveloperTools;dxPScxVGridLnkD16;dxPSdxDBOCLnkD16;dxPScxPCProdD16;JvDocking;adortl;JvWizards;dxBarExtItemsD16;dxPScxGridLnkD16;JvHMI;dxLayoutControlD16;dxDockingD16;JvBands;vcldbx;frx16;cxPivotGridD16;cxEditorsD16;dxPSTeeChartD16;dxPScxCommonD16;JvPluginSystem;dxPsPrVwAdvD16;Tee;JclContainers;DBXOdbcDriver;JvCmp;dxPSLnksD16;JvSystem;svnui;JvTimeFramework;JvControls;dxBarExtDBItemsD16;dxmdsD16;frxDB16;intrawebdb_120_160;dxSkinsCoreD16;dxSkinsdxDLPainterD16;fs16;FMXTee;TeeUI;vclactnband;JvJans;bindcompvcl;JvStdCtrls;JvCustom;Jcl;vclie;JvPageComps;JvPrintPreview;dxTabbedMDID16;dxPSPrVwRibbonD16;vcltouch;websnap;dxPSdxLCLnkD16;VclSmp;fsDB16;dxFlowChartD16;dxSkinsdxRibbonPainterD16;DataSnapConnectors;dsnapcon;JclVcl;JvPascalInterpreter;cxGridD16;vclx;svn;dxSkinsdxBarPainterD16;dxPScxTLLnkD16;bdertl;cxSchedulerD16;JvBDE;$(DCC_UsePackage)</DCC_UsePackage>
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+			<DCC_RemoteDebug>true</DCC_RemoteDebug>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+			<VerInfo_Keys>CompanyName=Odontosis Ltda.;FileDescription=Sistema de Gestão para Clínicias Odontológicas;FileVersion=1.0.0.9;InternalName=Odontosis;LegalCopyright=Odontosis Ltda.;LegalTrademarks=Odontosis Ltda.;OriginalFilename=Odontosis;ProductName=Odontosis;ProductVersion=1.0.0.9;Comments=www.odontosis.com.br</VerInfo_Keys>
+			<VerInfo_Build>9</VerInfo_Build>
+			<Icon_MainIcon>OdontoSis_Icon.ico</Icon_MainIcon>
+			<DCC_ExeOutput>EXE\</DCC_ExeOutput>
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<DCC_BplOutput>EXE\</DCC_BplOutput>
+			<VerInfo_Locale>1046</VerInfo_Locale>
+			<DCC_DcpOutput>DCU\</DCC_DcpOutput>
+			<DCC_DcuOutput>DCU\</DCC_DcuOutput>
+			<DCC_RemoteDebug>false</DCC_RemoteDebug>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="$(MainSource)">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="pas\Main.pas">
+				<Form>frmMain</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\Funcoes.pas"/>
+			<DCCReference Include="pas\uDM.pas">
+				<Form>DM</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="pas\Padrao.pas">
+				<Form>frmPadrao</Form>
+			</DCCReference>
+			<DCCReference Include="pas\SelecionaServidor.pas">
+				<Form>frmSelecionaServidor</Form>
+			</DCCReference>
+			<DCCReference Include="pas\Splash.pas">
+				<Form>frmSplash</Form>
+			</DCCReference>
+			<DCCReference Include="pas\TelaLogin.pas">
+				<Form>frmLogin</Form>
+			</DCCReference>
+			<DCCReference Include="pas\R_Padrao.pas">
+				<Form>frmRelatorioPadrao</Form>
+			</DCCReference>
+			<DCCReference Include="pas\Relatorios.pas">
+				<Form>frmRelatorios</Form>
+			</DCCReference>
+			<DCCReference Include="pas\R_Anamnese.pas">
+				<Form>frmRelAnamnese</Form>
+			</DCCReference>
+			<DCCReference Include="pas\CadastroOperadores.pas">
+				<Form>frmCadastroOperadores</Form>
+			</DCCReference>
+			<DCCReference Include="pas\ListaPadrao.pas">
+				<Form>frmListaPadrao</Form>
+			</DCCReference>
+			<DCCReference Include="pas\L_Paciente.pas">
+				<Form>frmListaPacientes</Form>
+			</DCCReference>
+			<DCCReference Include="pas\Lock.pas">
+				<Form>fmLock</Form>
+			</DCCReference>
+			<DCCReference Include="pas\P_Padrao.pas">
+				<Form>frmPesquisaPadrao</Form>
+			</DCCReference>
+			<DCCReference Include="pas\L_Cidade.pas">
+				<Form>frmListaCidade</Form>
+			</DCCReference>
+			<DCCReference Include="pas\L_CidadeIBGE.pas">
+				<Form>frmPesquisaCidadeIBGE</Form>
+			</DCCReference>
+			<DCCReference Include="pas\C_Paciente.pas">
+				<Form>frmCadPaciente</Form>
+			</DCCReference>
+			<DCCReference Include="pas\C_Cidade.pas">
+				<Form>frmCadCidades</Form>
+			</DCCReference>
+			<DCCReference Include="pas\L_Convenios.pas">
+				<Form>frmListaConvenios</Form>
+			</DCCReference>
+			<DCCReference Include="pas\c_convenio.pas">
+				<Form>frmCadConvenio</Form>
+			</DCCReference>
+			<DCCReference Include="pas\L_Anamnese.pas">
+				<Form>frmLAnmenese</Form>
+			</DCCReference>
+			<DCCReference Include="pas\C_Anamnese.pas">
+				<Form>frmCadastroAnamnese</Form>
+			</DCCReference>
+			<DCCReference Include="pas\P_Paciente.pas">
+				<Form>frmPesquisaPaciente</Form>
+			</DCCReference>
+			<DCCReference Include="pas\P_Medico.pas">
+				<Form>frmPesquisaMedico</Form>
+			</DCCReference>
+			<DCCReference Include="pas\E_Paciente.pas">
+				<Form>frmEdtPaciente</Form>
+			</DCCReference>
+			<DCCReference Include="pas\Descricao.pas">
+				<Form>frmDescricao</Form>
+			</DCCReference>
+			<DCCReference Include="pas\Data.pas">
+				<Form>frmData</Form>
+			</DCCReference>
+			<DCCReference Include="pas\F_PlanosTratamento.pas">
+				<Form>frmPlanosTratamento</Form>
+			</DCCReference>
+			<DCCReference Include="pas\C_PlanoTratamento.pas">
+				<Form>frmCPlanoTratamento</Form>
+			</DCCReference>
+			<DCCReference Include="pas\F_Historicos.pas">
+				<Form>frmHistoricos</Form>
+			</DCCReference>
+			<DCCReference Include="pas\F_AnotacaoDente.pas">
+				<Form>frmAnotacaoDente</Form>
+			</DCCReference>
+			<DCCReference Include="pas\F_ProcedimentoDente.pas">
+				<Form>frmProcedimentoDente</Form>
+			</DCCReference>
+			<DCCReference Include="pas\C_Medico.pas">
+				<Form>frmCadMedico</Form>
+			</DCCReference>
+			<DCCReference Include="pas\L_Medicos.pas">
+				<Form>frmListaMedicos</Form>
+			</DCCReference>
+			<DCCReference Include="pas\E_Medico.pas">
+				<Form>frmEdtMedico</Form>
+			</DCCReference>
+			<DCCReference Include="pas\AgendaPaciente.pas">
+				<Form>frmAgendaPaciente</Form>
+			</DCCReference>
+			<DCCReference Include="pas\F_Configuracoes.pas">
+				<Form>frmConfiguracoes</Form>
+			</DCCReference>
+			<DCCReference Include="pas\F_Encaixe.pas">
+				<Form>frmEncaixe</Form>
+			</DCCReference>
+			<DCCReference Include="pas\L_Procedimentos.pas">
+				<Form>frmProcedimentosMedico</Form>
+			</DCCReference>
+			<DCCReference Include="pas\C_Empresa.pas">
+				<Form>frmCadastroConsultorio</Form>
+			</DCCReference>
+			<DCCReference Include="pas\L_ExameOral.pas">
+				<Form>frmCadastroExameOral</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\C_ExameOral.pas">
+				<Form>frmCExameOral</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\Faturamento.pas">
+				<Form>frmRecebimento</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\R_Carne.pas">
+				<Form>frmRCarne</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\R_Orcamento.pas">
+				<Form>frmROrcamento</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_Receituario.pas">
+				<Form>frmReceituario</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\L_Receituario.pas">
+				<Form>frmListaReceituario</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\R_Receituario.pas">
+				<Form>frmRreceituario</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\Mensagem.pas">
+				<Form>frmMensagem</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\R_TermoConsentimento.pas">
+				<Form>frmRelTermoConsentimento</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_Obs.pas">
+				<Form>frmObservacao</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_Retorno.pas">
+				<Form>frmRetorno</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_AbreCaixa.pas">
+				<Form>frmAbreCaixa</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_Sobre.pas">
+				<Form>frmSobre</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_ReforcoCaixa.pas">
+				<Form>frmReforcoCaixa</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_SaqueValores.pas">
+				<Form>frmSaqueValores</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_ConferenciaLctos.pas">
+				<Form>frmConfCaixa</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_LancamentoCaixa.pas">
+				<Form>frmLancamentoCaixa</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_FechamentoCaixa.pas">
+				<Form>frmFechamentoCaixa</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\R_FechamentoCaixa.pas">
+				<Form>frmRelFechamentoCaixa</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\L_AgendaTelefonica.pas">
+				<Form>frmListaAgenda</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\C_AgendaTelefonica.pas">
+				<Form>frmCadAgendaTel</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_TitulosPagar.pas">
+				<Form>frmTitulosPagar</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\C_Fornecedores.pas">
+				<Form>frmCadFornecedores</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\L_Fornecedores.pas">
+				<Form>frmListaFornecedores</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\P_Fornecedor.pas">
+				<Form>frmPesquisaFornecedor</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\C_TituloAPagar.pas">
+				<Form>frmCadContaPagar</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_Atualizacao.pas">
+				<Form>frmAtualizacao</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_Parcelamento.pas">
+				<Form>frmParcelamento</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_Pagamento.pas">
+				<Form>frmPagamento</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\C_TermoConsentimento.pas">
+				<Form>frmTermoConsentimento</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\P_BancosPadrao.pas">
+				<Form>frmBancosPadrao</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\C_ContasBancarias.pas">
+				<Form>frmCadContasBancarias</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\L_ContasBancarias.pas">
+				<Form>frmListaContasBancarias</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\P_ContasBancarias.pas">
+				<Form>frmPesquisaContasBancarias</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_TitulosReceber.pas">
+				<Form>frmTitulosReceber</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\R_CaixaGeral.pas">
+				<Form>frmRelCaixaGeral</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_RelCaixaGeral.pas">
+				<Form>frmGerarRelCaixaGeral</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\C_TitulosReceber.pas">
+				<Form>frmCadTitulosReceber</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_ParcelamentoContaReceber.pas">
+				<Form>frmParcelamentoContaReceber</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_ChequesRecebidos.pas">
+				<Form>frmChequesRecebidos</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_ConferenciaLctosContasBancarias.pas">
+				<Form>frmConfContas</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_TransferenciaSaldos.pas">
+				<Form>frmTransferenciaSaldos</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_TitulosReceberConvenio.pas">
+				<Form>frmTitulosReceberConvenios</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\C_TitulosReceberConvenio.pas">
+				<Form>frmCadTitulosReceberConvenios</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\R_Recibo.pas">
+				<Form>frmRelRecibo</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\L_TermoConsentimento.pas">
+				<Form>frmListaTermoConsentimento</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\EditorTexto.pas">
+				<Form>frmEditorTexto</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\L_DocumentosPersonalizados.pas">
+				<Form>frmListaDocumentosPersonalizados</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\L_DocumentosPersonalizadosEmitidos.pas">
+				<Form>frmListaDocumentosPersonalizadosEmitidos</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\C_EmissaoDocumentoPersonalizado.pas">
+				<Form>frmCadDocumentoPersonalizado</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\P_Consultorios.pas">
+				<Form>frmPesquisaConsultorio</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\P_DocumentosPersonalizados.pas">
+				<Form>frmPDocsPersonalizados</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_PainelPadrao.pas">
+				<Form>frmPainelPadrao</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\PR_Paciente.pas">
+				<Form>frmPRelPaciente</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\L_Empresas.pas">
+				<Form>frmListaConsultorios</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\TabelasConvenios.pas"/>
+			<DCCReference Include="pas\F_Sair.pas">
+				<Form>frmFazerBackup</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\PR_HistoricoPaciente.pas">
+				<Form>frmPReHistoricoPaciente</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_Lembretes.pas">
+				<Form>frmLembretes</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\C_Estoque.pas">
+				<Form>frmCMateriais</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\L_Estoque.pas">
+				<Form>frmListaEstoque</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\P_Grupos.pas">
+				<Form>frmPGrupos</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\C_Grupos.pas">
+				<Form>frmCadGrupos</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\C_SMS.pas">
+				<Form>frmCadSMS</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_Atestados.pas">
+				<Form>frmAtestado</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\L_Atestados.pas">
+				<Form>frmListaAtestados</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\R_Atestados.pas">
+				<Form>frmRelAtestados</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\PR_PrevisaoReceberPlanoTratamento.pas">
+				<Form>frmRelPrevisaoReceberPlanoTratamento</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_NotificacaoFinanceira.pas">
+				<Form>frmNotificacaoFinanceira</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\R_RelacaoFinanceira.pas">
+				<Form>frmRRelacaoFinanceira</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_HistoricoCheques.pas">
+				<Form>frmHistoricoCheque</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_RepasseCheque.pas">
+				<Form>frmRepasseCheque</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\FuncaoNet.pas"/>
+			<DCCReference Include="pas\E_FotoPaciente.pas">
+				<Form>frmEditarFotoPaciente</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\F_AutoUpdate.pas">
+				<Form>frmAutoUpdate</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="pas\R_FichaCadastroPaciente.pas">
+				<Form>frmRFichaPaciente</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Delphi.Personality>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1046</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Excluded_Packages/>
+					<Source>
+						<Source Name="MainSource">Odontosis.dpr</Source>
+					</Source>
+				</Delphi.Personality>
+				<Deployment/>
+				<Platforms>
+					<Platform value="Win64">True</Platform>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+	</Project>

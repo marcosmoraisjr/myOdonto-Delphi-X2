@@ -1,0 +1,15 @@
+inherited frmCExameOral: TfrmCExameOral
+  ClientHeight = 290
+  ClientWidth = 514
+  ExplicitWidth = 520
+  ExplicitHeight = 314
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 514
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 266
+    Width = 514
+  end
+end

@@ -1,0 +1,43 @@
+unit C_AgendaTelefonica;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, Vcl.Buttons, Vcl.Mask,
+  Vcl.StdCtrls, JvComponentBase, JvEnterTab, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmCadAgendaTel = class(TfrmPadrao)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    EdtNome: TEdit;
+    EdtTelefone: TMaskEdit;
+    EdtCelular: TMaskEdit;
+    Label3: TLabel;
+    Label4: TLabel;
+    EdtObservacao: TEdit;
+    btnFechar: TSpeedButton;
+    btnSalvar: TSpeedButton;
+    procedure btnFecharClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadAgendaTel: TfrmCadAgendaTel;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmCadAgendaTel.btnFecharClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+end.

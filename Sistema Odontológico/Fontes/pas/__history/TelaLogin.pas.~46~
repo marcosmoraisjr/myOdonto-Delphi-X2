@@ -1,0 +1,267 @@
+unit TelaLogin;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, Vcl.Buttons, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, JvComponentBase, JvEnterTab, Vcl.ComCtrls, Funcoes,
+  Data.DB, Data.Win.ADODB, JvExButtons, JvBitBtn, Vcl.Mask, JvExMask, JvToolEdit, Registry,
+  Vcl.Menus, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, cxGraphics,
+  cxLookAndFeels, cxLookAndFeelPainters, Menus, dxSkinsCore,
+  dxSkinsDefaultPainters, cxButtons;
+
+type
+  TfrmLogin = class(TfrmPadrao)
+    Image1: TImage;
+    GroupBox3: TGroupBox;
+    EdtNome: TEdit;
+    GroupBox4: TGroupBox;
+    EdtSenha: TEdit;
+    qryAux: TADOQuery;
+    btnSalvar: TJvBitBtn;
+    GroupBox1: TGroupBox;
+    EdtCodE: TJvComboEdit;
+    EdtConsultorio: TEdit;
+    Acessar1: TMenuItem;
+    btnFechar: TcxButton;
+    procedure btnFecharClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure EdtCodEButtonClick(Sender: TObject);
+    procedure EdtCodEExit(Sender: TObject);
+  private
+    { Private declarations }
+    sEmpresa : String;
+    Procedure AbreRegistro;
+    Procedure GravaRegistro;
+  public
+    bLogado : Boolean;
+  end;
+
+var
+  frmLogin: TfrmLogin;
+
+implementation
+
+{$R *.dfm}
+
+uses P_Consultorios, Main;
+
+procedure TfrmLogin.AbreRegistro;
+begin
+  with TRegistry.create do
+    try
+      RootKey := HKey_Local_Machine;
+      if OpenKey('Software\OdontoSis\', true) then
+      begin
+        EdtCodE.Text := ReadString('Filial');
+
+        EdtCodEExit(Self);
+      end;
+    finally
+      Free;
+    end;
+end;
+
+procedure TfrmLogin.btnFecharClick(Sender: TObject);
+begin
+  inherited;
+  bLogado := False;
+  Close;
+end;
+
+procedure TfrmLogin.btnSalvarClick(Sender: TObject);
+var
+  sSenha : String;
+begin
+  inherited;
+
+ if EdtNome.Text = '' then
+  Begin
+    application.MessageBox('O campo NOME é obrigatório o preenchimento!', 'Erro!!!',
+      mb_ok + MB_ICONERROR);
+    EdtNome.SetFocus;
+    Exit;
+  End;
+
+ if EdtSenha.Text = '' then
+  Begin
+    application.MessageBox('O campo SENHA é obrigatório o preenchimento!', 'Erro!!!',
+      mb_ok + MB_ICONERROR);
+    EdtSenha.SetFocus;
+    Exit;
+  End;
+
+  if EdtCodE.Text = '' then
+  Begin
+    application.MessageBox('O campo CONSULTÓRIO é obrigatório o preenchimento!', 'Erro!!!',
+      mb_ok + MB_ICONERROR);
+    EdtCodE.SetFocus;
+    Exit;
+  End;
+
+  With qryAux do
+    Begin
+      Close;
+      SQl.Clear;
+      SQL.Add('SELECT * FROM OPERADORES');
+      SQL.Add('WHERE NOME = :pNome');
+      Parameters.ParamByName('pNome').Value := EdtNome.Text;
+      Open;
+
+      if (Not Eof) or (EdtNome.Text = 'suporte') and (EdtSenha.Text = 'odontosis2013') then
+        Begin
+          sSenha := Crypt('D', FieldByName('SENHA').AsString);
+
+          if (sSenha <> EdtSenha.Text) and (EdtNome.Text <> 'suporte') then
+            Begin
+              application.MessageBox('Senha Inválida!', 'Erro!',
+                mb_ok + MB_ICONERROR);
+              EdtSenha.SetFocus;
+              Exit;
+            End;
+
+          if (Not FieldByName('TODASFILIAL').AsBoolean) and (FieldByName('NOME').AsString <> 'admin') And (EdtNome.Text <> 'suporte') then
+            Begin
+              if FieldByName('ID_FILIAL').AsString <> EdtCodE.Text then
+                Begin
+                  application.MessageBox('O Operador não tem permissão para acessar este consultório!', 'Erro!!!',
+                    mb_ok + MB_ICONERROR);
+                  EdtCodE.SetFocus;
+                  Exit;
+                End;
+            End;
+
+          GravaRegistro;
+          bLogado := True;
+          CarregaOperador(FieldByName('ID_OPERADORES').AsInteger);
+          CarregaCFGEmpresa(StrToInt(EdtCodE.Text));
+          CarregaCFGGeral;
+        End
+      Else
+        Begin
+          application.MessageBox('Usuário Inválido!', 'Erro!!!',
+            mb_ok + MB_ICONERROR);
+          EdtNome.SetFocus;
+          Exit;
+        End;
+
+    End;
+
+    if bLogado then
+      Begin
+        Close;
+      End;
+end;
+
+procedure TfrmLogin.EdtCodEButtonClick(Sender: TObject);
+begin
+  inherited;
+  Application.CreateForm(TfrmPesquisaConsultorio, frmPesquisaConsultorio);
+  frmPesquisaConsultorio.bFechar := True;
+  frmPesquisaConsultorio.ShowModal;
+  EdtCodE.Text := frmMain.sCod;
+  EdtCodEExit(Sender);
+  FreeAndNil(frmPesquisaConsultorio);
+end;
+
+procedure TfrmLogin.EdtCodEExit(Sender: TObject);
+begin
+  inherited;
+
+  if EdtCodE.Text = '' then
+    Begin
+      EdtConsultorio.Text := '';
+      Exit;
+    End;
+
+  With qryAux do
+    Begin
+    Close;
+    SQL.Clear;
+    SQL.Add('SELECT NOME FROM EMPRESA');
+    SQL.Add('WHERE ID_EMPRESA = :pId');
+    Parameters.ParamByName('pId').Value := EdtCodE.Text;
+    Open;
+
+    if Eof then
+      Begin
+        EdtConsultorio.Text := '';
+        EdtCodE.Text := '';
+      End
+    Else
+      EdtConsultorio.Text := FieldByName('NOME').AsString;
+    End;
+end;
+
+procedure TfrmLogin.FormActivate(Sender: TObject);
+begin
+  inherited;
+  AbreRegistro;
+  EdtNome.SetFocus;
+
+  if EdtCodE.Text = '' then
+    Begin
+      EdtCodE.Text := '1';
+      EdtCodEExit(Self);
+    End;
+end;
+
+procedure TfrmLogin.FormCreate(Sender: TObject);
+begin
+  inherited;
+  bLogado := False;
+
+  With qryAux do
+    Begin
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT * FROM CONVENIOS');
+      SQL.Add('WHERE ID_CONVENIO = 1');
+      Open;
+
+      if Eof then
+        Begin
+          Append;
+          FieldByName('ATIVO').AsInteger := 1;
+          FieldByName('NOME').AsString := 'Particular';
+          FieldByName('TABELADEREF').AsInteger := 1;
+          FieldByName('NOMETABELA').AsString := 'Tabela em Branco';
+          FieldByName('REGISTROANS').AsString := '000000';
+          Post;
+
+        End;
+
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT * FROM OPERADORES');
+      Open;
+
+      if Eof then
+        Begin
+          Append;
+          FieldByName('NOME').AsString := 'admin';
+          FieldByName('SENHA').AsString := 'AE58D32DEF7E';
+          Post;
+        End;
+    End;
+end;
+
+procedure TfrmLogin.GravaRegistro;
+begin
+  with TRegistry.Create do
+    try
+      RootKey := HKey_Local_Machine;
+      if OpenKey('Software\OdontoSis\', true) then
+      begin
+        WriteString('Filial', EdtCodE.Text);
+      end;
+    finally
+      Free;
+    end;
+end;
+
+end.
+

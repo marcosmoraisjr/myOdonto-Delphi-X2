@@ -1,0 +1,41 @@
+unit F_LancamentoCaixa;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, JvComponentBase, JvEnterTab,
+  Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.StdCtrls, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
+  dxSkinsDefaultPainters, cxTextEdit, cxCurrencyEdit, Vcl.Mask, JvExMask,
+  JvToolEdit, Vcl.Buttons, Funcoes;
+
+type
+  TfrmLancamentoCaixa = class(TfrmPadrao)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    EdtHistorico: TEdit;
+    Label2: TLabel;
+    EdtDocumento: TEdit;
+    Label3: TLabel;
+    cbTipo: TComboBox;
+    Label4: TLabel;
+    EdtData: TJvDateEdit;
+    EdtValor: TcxCurrencyEdit;
+    Label5: TLabel;
+    btnFechar: TSpeedButton;
+    btnSalvar: TSpeedButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmLancamentoCaixa: TfrmLancamentoCaixa;
+
+implementation
+
+{$R *.dfm}
+
+end.

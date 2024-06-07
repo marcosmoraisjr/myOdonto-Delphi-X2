@@ -1,0 +1,140 @@
+unit L_AgendaTelefonica;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ListaPadrao, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
+  dxSkinsDefaultPainters, Vcl.StdCtrls, Data.DB, Data.Win.ADODB,
+  JvComponentBase, JvEnterTab, cxCheckBox, JvExStdCtrls, JvEdit, JvDBSearchEdit,
+  Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.ComCtrls, Vcl.ExtCtrls, Funcoes,
+  Vcl.Buttons;
+
+type
+  TfrmListaAgenda = class(TfrmListaPadrao)
+    cbFiltros: TComboBox;
+    qryPadraoNOME: TStringField;
+    qryPadraoTELEFONE: TStringField;
+    qryPadraoCELULAR: TStringField;
+    qryPadraoDESCRICAO: TStringField;
+    qryPadraoID_AGENDATELEFONE: TAutoIncField;
+    procedure FormActivate(Sender: TObject);
+    procedure cbFiltrosClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnAdicionarClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure gListaTitleBtnClick(Sender: TObject; ACol: Integer;
+      Field: TField);
+  private
+    { Private declarations }
+    Procedure FiltraPorClick(OrderBy : String);
+  public
+    { Public declarations }
+  end;
+
+var
+  frmListaAgenda: TfrmListaAgenda;
+
+implementation
+
+{$R *.dfm}
+
+uses C_AgendaTelefonica;
+
+procedure TfrmListaAgenda.btnAdicionarClick(Sender: TObject);
+begin
+  inherited;
+  AbreForm(TfrmCadAgendaTel, frmCadAgendaTel);
+  qryPadrao.Close;
+  qryPadrao.Open;
+end;
+
+procedure TfrmListaAgenda.btnEditarClick(Sender: TObject);
+begin
+  inherited;
+
+  if qryPadraoID_AGENDATELEFONE.AsString = '' then
+    Begin
+      Exit;
+    End;
+
+  Application.CreateForm(TfrmCadAgendaTel, frmCadAgendaTel);
+  frmCadAgendaTel.iIDAgenda := qryPadraoID_AGENDATELEFONE.AsInteger;
+  frmCadAgendaTel.CarregaDados;
+  frmCadAgendaTel.ShowModal;
+
+  FreeAndNil(frmCadAgendaTel);
+
+
+  qryPadrao.Close;
+  qryPadrao.Open;
+
+
+end;
+
+procedure TfrmListaAgenda.cbFiltrosClick(Sender: TObject);
+begin
+  inherited;
+  case cbFiltros.ItemIndex of
+    0: EdtPesquisa.DataField := 'Nome';
+    1: EdtPesquisa.DataField := 'Telefone';
+    2: EdtPesquisa.DataField := 'Celular';
+  end;
+end;
+
+procedure TfrmListaAgenda.FiltraPorClick(OrderBy: String);
+begin
+  With qryPadrao do
+    Begin
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT ID_AGENDATELEFONE, NOME, TELEFONE, CELULAR, DESCRICAO FROM AGENDATELEFONE');
+      SQL.Add(OrderBy);
+      Open;
+    End;
+end;
+
+procedure TfrmListaAgenda.FormActivate(Sender: TObject);
+begin
+//  inherited;
+
+end;
+
+procedure TfrmListaAgenda.FormCreate(Sender: TObject);
+begin
+  inherited;
+  cbFiltrosClick(Self);
+end;
+
+procedure TfrmListaAgenda.gListaTitleBtnClick(Sender: TObject; ACol: Integer;
+  Field: TField);
+begin
+  inherited;
+  case aCol of
+    0: Begin
+        EdtPesquisa.DataField := 'Nome';
+        GroupBox1.Caption := 'Nome';
+        FiltraPorClick('Order By NOME, ID_AGENDATELEFONE');
+    End;
+
+    1: Begin
+        EdtPesquisa.DataField := 'Telefone';
+        GroupBox1.Caption := 'Telefone';
+        FiltraPorClick('Order By TELEFONE, NOME, ID_AGENDATELEFONE');
+    End;
+
+    2: Begin
+        EdtPesquisa.DataField := 'Celular';
+        GroupBox1.Caption := 'Celular';
+        FiltraPorClick('Order By CELULAR, NOME, ID_AGENDATELEFONE');
+    End;
+
+    3: Begin
+
+    End;
+
+  end;
+end;
+
+end.

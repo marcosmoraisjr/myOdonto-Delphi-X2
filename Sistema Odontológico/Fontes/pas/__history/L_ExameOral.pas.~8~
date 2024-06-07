@@ -1,0 +1,103 @@
+unit L_ExameOral;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, Data.DB, Data.Win.ADODB,
+  Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.StdCtrls, Vcl.Buttons,
+  JvComponentBase, JvEnterTab, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmCadastroExameOral = class(TfrmPadrao)
+    btnAdicionar: TSpeedButton;
+    btnSelecionar: TSpeedButton;
+    btnEditar: TSpeedButton;
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    gLista: TJvDBGrid;
+    GroupBox3: TGroupBox;
+    JvDBGrid1: TJvDBGrid;
+    qryPesquisa: TADOQuery;
+    dsPesquisa: TDataSource;
+    qryPerguntas: TADOQuery;
+    btnFechar: TSpeedButton;
+    qryPesquisaID_EXAMEORAL: TAutoIncField;
+    qryPesquisaDESCRICAO: TStringField;
+    qryPesquisaDATA: TDateTimeField;
+    qryPerguntasID_PERGUNTASEXAMEORAL: TAutoIncField;
+    qryPerguntasID_EXAMEORAL: TIntegerField;
+    qryPerguntasPERGUNTA: TStringField;
+    qryPerguntasOBRIGATORIO: TBooleanField;
+    procedure gListaCellClick(Column: TColumn);
+    procedure btnSelecionarClick(Sender: TObject);
+  private
+    Procedure CarregaExameOral;
+    Procedure CarregaPerguntas;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastroExameOral: TfrmCadastroExameOral;
+
+implementation
+
+{$R *.dfm}
+
+uses Main;
+
+{ TfrmCadastroExameOral }
+
+procedure TfrmCadastroExameOral.btnSelecionarClick(Sender: TObject);
+begin
+  inherited;
+  frmMain.sCod := qryPesquisaID_EXAMEORAL.AsString;
+  Close;
+end;
+
+procedure TfrmCadastroExameOral.CarregaExameOral;
+begin
+  With qryPesquisa do
+  Begin
+    Close;
+    SQL.Clear;
+    SQL.Add('SELECT * FROM EXAMEORAL');
+    SQL.Add('ORDER BY DATA, DESCRICAO');
+    Open;
+  End;
+end;
+
+procedure TfrmCadastroExameOral.CarregaPerguntas;
+begin
+  With qryPerguntas do
+  Begin
+    Close;
+    SQL.Clear;
+    SQL.Add('SELECT * FROM PERGUNTASEXAMEORAL');
+    SQL.Add('WHERE ID_EXAMEORAL = :pID');
+    Parameters.ParamByName('pID').Value := qryPesquisaID_EXAMEORAL.AsInteger;
+    Open;
+  End;
+end;
+
+procedure TfrmCadastroExameOral.gListaCellClick(Column: TColumn);
+begin
+  inherited;
+  if qryPesquisaID_EXAMEORAL.AsString = '' then
+  Begin
+    Exit;
+  End;
+
+  With qryPerguntas do
+  Begin
+    Close;
+    SQL.Clear;
+    SQL.Add('SELECT * FROM PERGUNTASEXAMEORAL');
+    SQL.Add('WHERE ID_EXAMEORAL = :pID');
+    Parameters.ParamByName('pID').Value := qryPesquisaID_EXAMEORAL.AsInteger;
+    Open;
+  End;
+end;
+
+end.

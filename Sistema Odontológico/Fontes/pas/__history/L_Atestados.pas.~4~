@@ -1,0 +1,59 @@
+unit L_Atestados;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ListaPadrao, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
+  dxSkinsDefaultPainters, Menus, Data.DB, Data.Win.ADODB,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, JvComponentBase, JvEnterTab,
+  Vcl.StdCtrls, cxButtons, cxCheckBox, JvExStdCtrls, JvEdit, JvDBSearchEdit,
+  Vcl.Buttons, Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.ComCtrls, Funcoes,
+  Vcl.ExtCtrls;
+
+type
+  TfrmListaAtestados = class(TfrmListaPadrao)
+    qryPadraoPaciente: TStringField;
+    qryPadraoDentista: TStringField;
+    qryPadraoID_ATESTADOS: TAutoIncField;
+    qryPadraoDATA: TDateTimeField;
+    qryPadraoHORAINI: TStringField;
+    qryPadraoFINSS: TStringField;
+    qryPadraoOperador: TStringField;
+    qryPadraoOBSERVACAO: TMemoField;
+    qryPadraoID_PACIENTE: TIntegerField;
+    qryPadraoID_MEDICO: TIntegerField;
+    qryPadraoID_OPERADOR: TIntegerField;
+    qryPadraoFINS: TIntegerField;
+    qryPadraoHORAFIM: TStringField;
+    procedure btnAdicionarClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmListaAtestados: TfrmListaAtestados;
+
+implementation
+
+{$R *.dfm}
+
+uses F_Atestados;
+
+procedure TfrmListaAtestados.btnAdicionarClick(Sender: TObject);
+begin
+  inherited;
+  AbreForm(TfrmAtestado, frmAtestado);
+end;
+
+procedure TfrmListaAtestados.FormActivate(Sender: TObject);
+begin
+//  inherited;
+
+end;
+
+end.

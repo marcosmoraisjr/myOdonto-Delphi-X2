@@ -1,0 +1,380 @@
+unit F_Atualizacao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
+  dxSkinsDefaultPainters, cxProgressBar, JvComponentBase, JvEnterTab,
+  Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.Buttons, Data.DB, Data.Win.ADODB, Vcl.StdCtrls,
+  Vcl.Menus, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, Funcoes;
+
+type
+  TfrmAtualizacao = class(TfrmPadrao)
+    Barra: TcxProgressBar;
+    qryAux: TADOQuery;
+    btnFechar: TSpeedButton;
+    btnSalvar: TSpeedButton;
+    mmoLog: TMemo;
+    ODSImagens: TADOConnection;
+    ODSWord: TADOConnection;
+    ODSUpdate: TADOConnection;
+    procedure FormCreate(Sender: TObject);
+  private
+    bODSWord,
+    bODSUpdate,
+    bODSImagens : Boolean;
+    Procedure AtualizaBanco;
+    Procedure AtualizaDBO(sSQL: String);
+    Procedure AtualizaODSImagens(sSQL: String);
+    Procedure AtualizaODSWord(sSQL: String);
+    Procedure AtualizaODSUpdate(sSQL: String);
+    Procedure AtualizaVersaoBanco(iBanco : Integer);
+  public
+    { Public declarations }
+  end;
+
+var
+  frmAtualizacao: TfrmAtualizacao;
+
+implementation
+
+{$R *.dfm}
+
+uses uDM;
+
+procedure TfrmAtualizacao.AtualizaBanco;
+var
+  iBanco: Integer;
+  sSQL: WideString;
+begin
+  inherited;
+  btnFechar.Enabled := False;
+  btnSalvar.Enabled := False;
+
+  With qryAux do
+  Begin
+    Close;
+    SQL.Clear;
+    SQL.Add('SELECT * FROM OPINT');
+    Open;
+
+    iBanco := FieldByName('VERSAODB').AsInteger;
+
+    if iBanco = 0 then iBanco := 1;
+    mmoLog.Lines.Clear;
+    mmoLog.Lines.Add('Log de Erro: Odontosis.');
+    mmoLog.Lines.Add(FormatDateTime('DD/MM/YYYY HH:MM:SS', Now));
+    mmoLog.Lines.Add('-----------------------------------------------------------------------');
+    mmoLog.Lines.Add('');
+  End;
+
+  if iBanco = 1 then
+  Begin
+    AtualizaDBO('CREATE TABLE SALDOCONTASBANCARIAS(ID_SALDOCONTASBANCARIAS INT IDENTITY(1,1) NOT NULL primary key, ID_FILIAL INT, ID_CONTASBANCARIAS INT, ID_OPERADOR INT, ENTRADA_SAIDA INT, HISTORICO VARCHAR(100), DATA DATETIME, VLRENTRADA FLOAT, VLRSAIDA FLOAT)');
+    iBanco := iBanco + 1;
+  End;
+
+  if iBanco = 2 then
+  Begin
+    AtualizaDBO('ALTER TABLE SALDOCONTASBANCARIAS ADD CONSTRAINT	DF_SALDOCONTASBANCARIAS_VLRENTRADA DEFAULT 0 FOR VLRENTRADA ALTER TABLE SALDOCONTASBANCARIAS ADD CONSTRAINT	DF_SALDOCONTASBANCARIAS_VLRSAIDA DEFAULT 0 FOR VLRSAIDA');
+    AtualizaDBO('ALTER TABLE SALDOCONTASBANCARIAS SET (LOCK_ESCALATION = TABLE)');
+    iBanco := iBanco + 1;
+  End;
+
+  if iBanco = 3 then
+  Begin
+    AtualizaDBO('CREATE TABLE CONTARECEBERCONVENIO(ID_CONTARECEBERCONVENIO INT IDENTITY(1,1) NOT NULL primary key, ID_FILIAL INT, ID_CONVENIO INT, SITUACAO INT, HISTORICO VARCHAR(150), DOCUMENTO VARCHAR(100))');
+    AtualizaDBO('ALTER TABLE CONTARECEBERCONVENIO ADD DTACONTA DATETIME, DTAVENCIMENTO DATETIME, DTAPAGAMENTO DATETIME, VALOR FLOAT default 0, VALORPAGO FLOAT default 0, VALORRESTANTE FLOAT default 0');
+    iBanco := iBanco + 1;
+  End;
+
+  if iBanco = 4 then
+  Begin
+    AtualizaDBO('CREATE TABLE HISTORICOCONTASRECEBERCONVENIO(ID_HISTORICOCONTASRECEBERCONVENIO INT IDENTITY(1,1) NOT NULL primary key,ID_CONTARECEBERCONVENIO INT,ID_FILIAL INT,ID_OPERADOR INT,REFERENCIA INT,TIPO INT,VLRRECEBIDO FLOAT DEFAULT 0,DATA DATETIME)');
+    iBanco := iBanco + 1;
+  End;
+
+  if iBanco = 5 then
+  Begin
+    AtualizaDBO('DROP TABLE CONTASRECEBER');
+    AtualizaDBO('CREATE TABLE ATENDIMENTO(ID_ATENDIMENTO INT IDENTITY(1,1) NOT NULL primary key,ID_AGENDA INT,ID_PLANOTRATAMENTO INT,ID_OPERADOR INT,STATUS INT,STATUSTEXTO VARCHAR(20),DATA DATETIME)');
+    AtualizaDBO('CREATE TABLE ATENDIMENTOITENS(ID_ATENDIMENTOITENS INT IDENTITY(1,1) NOT NULL primary key,ID_ATENDIMENTO INT,ID_ITENSPROPOSTATRATAMENTO INT,SELECIONADO BIT)');
+    iBanco := iBanco +1;
+  End;
+
+  if iBanco = 6 then
+  Begin
+    AtualizaDBO('ALTER TABLE PROCEDIMENTOSDENTES ADD CONSTRAINT DF_PROCEDIMENTOSDENTES_PROCEDIMENTOGLOSADO DEFAULT 0 FOR PROCEDIMENTOGLOSADO');
+    iBanco := iBanco +1;
+  End;
+
+  if iBanco = 7 then
+  Begin
+    AtualizaDBO('ALTER TABLE CFGGERAL ADD	VIASRECIBO int NULL ALTER TABLE CFGGERAL ADD CONSTRAINT	DF_CFGGERAL_VIASRECIBO DEFAULT 1 FOR VIASRECIBO');
+    iBanco := iBanco +1;
+  End;
+
+  if iBanco = 8 then
+  Begin
+    AtualizaDBO('CREATE TABLE DOCSPERSONALIZADOS(ID_DOCSPERSONALIZADOS INT IDENTITY(1,1) NOT NULL primary key, DESCRICAO VARCHAR(100), PASTA VARCHAR(100), PACIENTE BIT, DENTISTA BIT, CONSULTORIO BIT)');
+    iBanco := iBanco +1;
+  End;
+
+  if iBanco = 9 then
+  Begin
+    AtualizaDBO('CREATE TABLE DOCSPERSONALIZADOSEMI(ID_DOCSPERSONALIZADOSEMI INT IDENTITY(1,1) NOT NULL primary key, ID_DOCSPERSONALIZADOS INT, ID_PACIENTE INT, ID_MEDICO INT, ID_EMPRESA INT, DATA DATETIME)');
+    iBanco := iBanco +1;
+  End;
+
+  if iBanco = 10 then
+  Begin
+    AtualizaDBO('ALTER TABLE DOCSPERSONALIZADOSEMI ADD CONSTRAINT DF_DOCSPERSONALIZADOSEMI_ID_PACIENTE DEFAULT 0 FOR ID_PACIENTE');
+    AtualizaDBO('ALTER TABLE DOCSPERSONALIZADOSEMI ADD CONSTRAINT DF_DOCSPERSONALIZADOSEMI_ID_MEDICO DEFAULT 0 FOR ID_MEDICO');
+    AtualizaDBO('ALTER TABLE DOCSPERSONALIZADOSEMI ADD CONSTRAINT DF_DOCSPERSONALIZADOSEMI_ID_EMPRESA DEFAULT 0 FOR ID_EMPRESA');
+    iBanco := iBanco +1;
+  End;
+
+  if iBanco = 11 then
+  Begin
+    AtualizaDBO('ALTER TABLE PROCEDIMENTOS DROP COLUMN TEMPOMEDIO');
+    AtualizaDBO('ALTER TABLE PROCEDIMENTOS ADD TEMPOMEDIO VARCHAR(10)');
+    AtualizaDBO('ALTER TABLE dbo.PROCEDIMENTOS ADD CONSTRAINT DF_PROCEDIMENTOS_TEMPOMEDIO DEFAULT '+QuotedStr('00:00:00')+' FOR TEMPOMEDIO');
+    iBanco := iBanco +1;
+  End;
+
+  if iBanco = 12 then
+  Begin
+    AtualizaDBO('ALTER TABLE OPERADORES ADD TODASFILIAL bit NULL, ID_FILIAL int NULL');
+    AtualizaDBO('ALTER TABLE OPERADORES ADD CONSTRAINT	DF_OPERADORES_ID_FILIAL DEFAULT 0 FOR ID_FILIAL');
+    iBanco := iBanco + 1;
+  End;
+
+  if iBanco = 13 then
+  Begin
+    AtualizaDBO('ALTER TABLE OPERADORES ADD RETORNOV BIT, RETORNOC BIT, RETORNOE BIT, BANCOV BIT, BANCOC BIT, BANCOE BIT');
+    AtualizaDBO('ALTER TABLE OPERADORES ADD DOCPERSONALIZADOV BIT, DOCPERSONALIZADOC BIT, DOCPERSONALIZADOE BIT');
+    AtualizaDBO('ALTER TABLE OPERADORES ADD EMIDOCPERSONALIZADOV BIT, EMIDOCPERSONALIZADOC BIT, EMIDOCPERSONALIZADOE BIT, RECEITUARIOV BIT, RECEITUARIOC BIT, RECEITUARIOE BIT');
+    AtualizaDBO('ALTER TABLE OPERADORES ADD ATESTADOSV BIT, ATESTADOSC BIT, ATESTADOSE BIT, TERMOSV BIT, TERMOSC BIT, TERMOSE BIT');
+    iBanco := iBanco +1;
+  End;
+
+  if iBanco = 14 then
+  Begin
+    AtualizaDBO('ALTER TABLE OPERADORES ADD FORNECEDORESV BIT, FORNECEDORESC BIT, FORNECEDORESE BIT');
+    iBanco := iBanco +1;
+  End;
+
+  if iBanco = 15 then
+  Begin
+    AtualizaDBO('ALTER TABLE OPERADORES ADD CaixaV BIT, CaixaA BIT, CaixaF BIT, TitulosPagarV BIT, TitulosPagarC BIT, TitulosPagarE BIT, TitulosPagarD BIT, TitulosPagarB BIT, TitulosPagarEstornar BIT, TitulosPagarP BIT');
+    AtualizaDBO('ALTER TABLE OPERADORES ADD TitulosReceberPV BIT, TitulosReceberPC BIT, TitulosReceberPE BIT, TitulosReceberPD BIT, TitulosReceberPB BIT, TitulosReceberPEstornar BIT, TitulosReceberPP BIT, TitulosReceberCV BIT, TitulosReceberCC BIT');
+    AtualizaDBO('ALTER TABLE OPERADORES ADD TitulosReceberCE BIT, TitulosReceberCD BIT, TitulosReceberCB BIT, TitulosReceberCEstornar BIT, TitulosReceberCP BIT, ChequesRecebidosV BIT, ChequesRecebidosE BIT, ChequesRecebidosC BIT');
+    AtualizaDBO('ALTER TABLE OPERADORES ADD LancamentoCaixa BIT, ConfLancCaixa BIT, ConfLancBanco BIT, ReforcoCaixa BIT, SaqueValores BIT, RelCaixaGeral BIT, TransfSaldos BIT');
+    iBanco := iBanco +1;
+  End;
+
+  if iBanco = 16 then
+  Begin
+    AtualizaDBO('DROP TABLE FOTOSPACIENTE');
+    iBanco := iBanco + 1;
+  End;
+
+  if iBanco = 17 then
+  Begin
+    AtualizaDBO('ALTER TABLE EMPRESA ADD TIPO INT, CELULAR VARCHAR(20)');
+    AtualizaDBO('ALTER TABLE HISTORICOPACIENTE ADD TIPO INT');
+    AtualizaDBO('ALTER TABLE HISTORICOPACIENTE ADD ID_OPERADOR INT');
+    iBanco := iBanco + 1;
+  End;
+
+  if iBanco = 18 then
+  Begin
+    AtualizaDBO('ALTER TABLE PACIENTE ADD CELULAR2 VARCHAR(20), COMPLEMENTO VARCHAR(100), TELRECADO VARCHAR(20), NOMERECADO VARCHAR(60)');
+    AtualizaDBO('ALTER TABLE EMPRESA ADD COMPLEMENTO VARCHAR(100)');
+    iBanco := iBanco +1;
+  End;
+
+  if iBanco = 19 then
+  Begin
+    AtualizaDBO('CREATE TABLE CFGRELATORIO(ID_CFGRELATORIO INT IDENTITY(1,1) NOT NULL primary key,TEXTO TEXT,FONTE VARCHAR(100),NEGRITO BIT,ITALICO BIT,SUBLINHADO BIT,TAMANHO INT,COR VARCHAR(100),LOGO IMAGE)');
+    AtualizaDBO('ALTER TABLE CFGRELATORIO ADD CBTAMANHO INT');
+    AtualizaDBO('ALTER TABLE ATENDIMENTO ADD DATAFIM DATETIME');
+    AtualizaDBO('ALTER TABLE ITENSPROPOSTATRATAMENTO ADD ValorPago Float DEFAULT 0');
+    AtualizaDBO('CREATE TABLE LEMBRETES(ID_LEMBRETES INT IDENTITY(1,1) NOT NULL primary key,ID_OPERADOR INT,TITULO VARCHAR(100),MENSAGEM VARCHAR(400),ID_OPERADORMENSAGEM INT,DATA DATETIME)');
+    AtualizaDBO('CREATE TABLE MATERIAIS(ID_MATERIAIS INT IDENTITY(1,1) NOT NULL primary key,ID_GRUPO INT,QTDE FLOAT DEFAULT 0,QTDEMIN FLOAT DEFAULT 0,DESCRICAO VARCHAR(200),UNIDADE VARCHAR(10),REFERENCIA VARCHAR(200),PRECOCOMPRA FLOAT DEFAULT 0)');
+    AtualizaDBO('CREATE TABLE GRUPO(ID_GRUPO INT IDENTITY(1,1) NOT NULL primary key, DESCRICAO VARCHAR(100))');
+    iBanco := iBanco +1;
+  End;
+
+  if iBanco = 20 then
+  Begin
+    AtualizaDBO('ALTER TABLE CFGGERAL ADD SMTP VARCHAR(100), PORTA INT, EMAIL VARCHAR(100), SENHA VARCHAR(100), REQUERAUTENTICACAO BIT, CONEXAOSEGURASSL BIT');
+    AtualizaDBO('ALTER TABLE CFGGERAL ADD EPACIENTEAGENDAMENTO BIT, EPACIENTEFILAENCAIXE BIT, EPACIENTERETORNO BIT, ELEMBRETECONSULTA BIT, EDIASANTES INT, EENVIAAGANDA BIT, EHORARIODEENVIO VARCHAR(10)');
+    AtualizaDBO('ALTER TABLE CFGGERAL ADD SPACIENTEAGENDAMENTO BIT, SPACIENTEFILAENCAIXE BIT, SPACIENTERETORNO BIT, SLEMBRETECONSULTA BIT, SDIASANTES INT, SMENSAGEM VARCHAR(MAX), SQTDESMS INT DEFAULT 0');
+    AtualizaDBO('ALTER TABLE AGENDA ADD SLEMBRETE BIT, ELEMBRETE BIT, EAGENDAMENTO BIT, SAGENDAMENTO BIT');
+    AtualizaDBO('CREATE TABLE ATESTADOS(ID_ATESTADOS INT IDENTITY(1,1) NOT NULL primary key,ID_PACIENTE INT,ID_MEDICO INT,ID_OPERADOR INT,DATA DATETIME,FINS INT,HORAINI VARCHAR(10),HORAFIM VARCHAR(10),OBSERVACAO VARCHAR(MAX))');
+    AtualizaDBO('ALTER TABLE OPERADORES ADD NotificacaoFinanceira BIT');
+    AtualizaDBO('ALTER TABLE CHEQUESRECEBIDO ADD NOMEREP VARCHAR(200), TELREP VARCHAR(100)');
+    AtualizaDBO('CREATE TABLE HISTORICOCHEQUE(ID_HISTORICOCHEQUE INT IDENTITY(1,1) NOT NULL primary key,ID_CHEQUESRECEBIDO INT,ID_OPERADOR INT,ID_FILIAL INT,DATA DATETIME,HISTORICO VARCHAR(MAX))');
+  End;
+
+  AtualizaVersaoBanco(iBanco);
+
+  if not DirectoryExists('C:\Odontosis\Logs\') then
+    Begin
+      ForceDirectories('C:\Odontosis\Logs\');
+    End;
+
+  if mmoLog.Lines.Count > 4 then
+    Begin
+      mmoLog.Lines.SaveToFile('C:\Odontosis\Logs\DB'+ IntToStr(iBanco) +'.txt');
+    End;
+  Close;
+end;
+
+Procedure TfrmAtualizacao.AtualizaDBO(sSQL: String);
+begin
+    With qryAux do
+    Try
+      Connection := DM.Conexao;
+      Close;
+      SQL.Clear;
+      SQL.Add(sSQL);
+      ExecSQL;
+    Except
+     On E: Exception do
+      mmoLog.Lines.Add(E.Message);
+     //Ignora os Erros
+    End;
+end;
+
+procedure TfrmAtualizacao.AtualizaODSImagens(sSQL: String);
+var
+  sConect : String;
+begin
+
+  if not bODSImagens then
+    Begin
+      sConect := '';
+      sConect := sConect + ' Provider=SQLOLEDB.1; ';
+      sConect := sConect + ' Persist Security Info=True; ';
+      sConect := sConect + ' User ID=' + CfgAcesso.Usuario + '; ';
+      sConect := sConect + ' Password=' + CfgAcesso.Senha + '; ';
+      sConect := sConect + ' Initial Catalog=ODSIMAGENS; ';
+      sConect := sConect + ' Data Source=' + CfgAcesso.Servidor+'; ';
+
+      ODSImagens.ConnectionString := sConect;
+      ODSImagens.Connected := True;
+      bODSImagens := True;
+    End;
+
+    With qryAux do
+    Try
+      Connection := ODSImagens;
+      Close;
+      SQL.Clear;
+      SQL.Add(sSQL);
+      ExecSQL;
+    Except
+     On E: Exception do
+      mmoLog.Lines.Add(E.Message);
+     //Ignora os Erros
+    End;
+end;
+
+procedure TfrmAtualizacao.AtualizaODSUpdate(sSQL: String);
+var
+  sConect : String;
+begin
+
+  if Not bODSUpdate then
+    Begin
+      sConect := '';
+      sConect := sConect + ' Provider=SQLOLEDB.1; ';
+      sConect := sConect + ' Persist Security Info=True; ';
+      sConect := sConect + ' User ID=' + CfgAcesso.Usuario + '; ';
+      sConect := sConect + ' Password=' + CfgAcesso.Senha + '; ';
+      sConect := sConect + ' Initial Catalog=ODSUpdate; ';
+      sConect := sConect + ' Data Source=' + CfgAcesso.Servidor+'; ';
+
+      ODSUpdate.ConnectionString := sConect;
+      ODSUpdate.Connected := True;
+      bODSUpdate := True;
+    End;
+
+    With qryAux do
+    Try
+      Connection := ODSUpdate;
+      Close;
+      SQL.Clear;
+      SQL.Add(sSQL);
+      ExecSQL;
+    Except
+     On E: Exception do
+      mmoLog.Lines.Add(E.Message);
+     //Ignora os Erros
+    End;
+end;
+
+procedure TfrmAtualizacao.AtualizaODSWord(sSQL: String);
+var
+  sConect : String;
+begin
+  if not bODSWord then
+    Begin
+      sConect := '';
+      sConect := sConect + ' Provider=SQLOLEDB.1; ';
+      sConect := sConect + ' Persist Security Info=True; ';
+      sConect := sConect + ' User ID=' + CfgAcesso.Usuario + '; ';
+      sConect := sConect + ' Password=' + CfgAcesso.Senha + '; ';
+      sConect := sConect + ' Initial Catalog=ODSWORD; ';
+      sConect := sConect + ' Data Source=' + CfgAcesso.Servidor+'; ';
+
+      ODSWord.ConnectionString := sConect;
+      ODSWord.Connected := True;
+      bODSWord := True;
+    End;
+
+    With qryAux do
+    Try
+      Connection := ODSWord;
+      Close;
+      SQL.Clear;
+      SQL.Add(sSQL);
+      ExecSQL;
+    Except
+     On E: Exception do
+      mmoLog.Lines.Add(E.Message);
+     //Ignora os Erros
+    End;
+end;
+
+procedure TfrmAtualizacao.AtualizaVersaoBanco(iBanco: Integer);
+begin
+  With qryAux do
+    Begin
+      Connection := DM.Conexao;
+      Close;
+      SQL.Clear;
+      SQL.Add('SELECT * FROM OPINT');
+      Open;
+
+      Edit;
+      FieldByName('VERSAODB').AsInteger := iBanco;
+      Post;
+    End;
+end;
+
+procedure TfrmAtualizacao.FormCreate(Sender: TObject);
+begin
+  bODSWord := False;
+  bODSImagens := False;
+  bODSUpdate := False;
+
+  AtualizaBanco;
+end;
+
+end.

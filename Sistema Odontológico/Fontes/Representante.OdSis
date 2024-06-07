@@ -1,0 +1,1 @@
+Insert Into Representante(Codigo, Nome, Telefone, Endereco, Numero, Bairro, Cidade, UF, CEP) Values('Codigo', 'Nome do Representante', '(46) 9900-9419', 'R. Bernadina da Silva', '559', 'Centro', 'São José da Boa Vista', 'PR', '84980-000')

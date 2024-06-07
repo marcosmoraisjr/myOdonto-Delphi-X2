@@ -1,0 +1,66 @@
+unit P_Paciente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, P_Padrao, JvComponentBase, JvEnterTab,
+  Data.DB, Data.Win.ADODB, Vcl.StdCtrls, Vcl.Buttons, Vcl.ComCtrls,
+  Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid, JvExStdCtrls, Funcoes,
+  JvEdit, JvDBSearchEdit, cxGraphics, cxLookAndFeels, cxLookAndFeelPainters,
+  Menus, dxSkinsCore, dxSkinsDefaultPainters, cxButtons,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup;
+
+type
+  TfrmPesquisaPaciente = class(TfrmPesquisaPadrao)
+    qryPesquisaID_PACIENTE: TAutoIncField;
+    qryPesquisaNOME: TStringField;
+    qryPesquisaCPF: TStringField;
+    qryPesquisaCELULAR: TStringField;
+    qryPesquisaCONVENIO: TStringField;
+    qryPesquisaIdade: TIntegerField;
+    GroupBox1: TGroupBox;
+    cxButton2: TcxButton;
+    cxButton3: TcxButton;
+    cxButton1: TcxButton;
+    btnFechar: TcxButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPesquisaPaciente: TfrmPesquisaPaciente;
+
+implementation
+
+{$R *.dfm}
+
+uses Main, C_Paciente;
+
+{procedure TfrmPesquisaPaciente.btnAdicionarClick(Sender: TObject);
+begin
+  inherited;
+  if not Operador.ListaPacienteC then
+  Begin
+    application.MessageBox
+      ('Operador não tem permissão para cadastrar um paciênte!',
+      'Acesso Negado', mb_ok + MB_ICONWARNING);
+    Exit;
+  End;
+
+  AbreForm(TfrmCadPaciente, frmCadPaciente);
+  qryPesquisa.Close;
+  qryPesquisa.Open;
+end;
+}
+procedure TfrmPesquisaPaciente.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+  frmMain.sCod  := qryPesquisaID_PACIENTE.AsString;
+end;
+
+end.

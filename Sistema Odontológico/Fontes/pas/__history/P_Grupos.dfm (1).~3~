@@ -1,0 +1,45 @@
+inherited frmPGrupos: TfrmPGrupos
+  ExplicitTop = -149
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited gLista: TJvDBGrid
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID_GRUPO'
+        Title.Caption = 'Cod.'
+        Width = 32
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DESCRICAO'
+        Title.Caption = 'Descri'#231#227'o'
+        Width = 458
+        Visible = True
+      end>
+  end
+  inherited Panel1: TPanel
+    Caption = 'Grupos'
+    ExplicitTop = -6
+  end
+  inherited gbNome: TGroupBox
+    Caption = 'Descri'#231#227'o'
+    ExplicitTop = 421
+  end
+  inherited GroupBox1: TGroupBox
+    ExplicitTop = 469
+  end
+  inherited qryPesquisa: TADOQuery
+    SQL.Strings = (
+      'SELECT * FROM GRUPO')
+    object qryPesquisaID_GRUPO: TAutoIncField
+      FieldName = 'ID_GRUPO'
+      ReadOnly = True
+    end
+    object qryPesquisaDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 100
+    end
+  end
+end

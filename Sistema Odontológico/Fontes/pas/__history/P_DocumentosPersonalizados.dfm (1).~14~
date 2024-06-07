@@ -1,0 +1,57 @@
+inherited frmPDocsPersonalizados: TfrmPDocsPersonalizados
+  ExplicitTop = 8
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited gLista: TJvDBGrid
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID_DOCUMENTOS'
+        Title.Caption = 'Cod.'
+        Width = 44
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DESCRICAO'
+        Title.Caption = 'Descri'#231#227'o'
+        Width = 449
+        Visible = True
+      end>
+  end
+  inherited Panel1: TPanel
+    Caption = 'Documentos Personalizados'
+    ExplicitWidth = 398
+  end
+  inherited StatusBar1: TStatusBar
+    ExplicitWidth = 398
+  end
+  inherited gbNome: TGroupBox
+    Caption = 'Descri'#231#227'o'
+    ExplicitWidth = 398
+    inherited EdtLoc: TJvDBSearchEdit
+      DataField = 'DESCRICAO'
+    end
+  end
+  inherited GroupBox1: TGroupBox
+    ExplicitWidth = 398
+    inherited btnAdicionar: TcxButton
+      OnClick = btnAdicionarClick
+    end
+    inherited btnSelecionar: TcxButton
+      OnClick = btnSelecionarClick
+    end
+  end
+  inherited qryPesquisa: TADOQuery
+    SQL.Strings = (
+      'SELECT ID_DOCUMENTOS, DESCRICAO FROM DOCUMENTOS')
+    object qryPesquisaDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 100
+    end
+    object qryPesquisaID_DOCUMENTOS: TAutoIncField
+      FieldName = 'ID_DOCUMENTOS'
+      ReadOnly = True
+    end
+  end
+end

@@ -1,0 +1,39 @@
+unit C_SMS;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Padrao, Vcl.Menus,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, JvComponentBase, JvEnterTab,
+  Vcl.ComCtrls, Vcl.ExtCtrls, cxGraphics, cxLookAndFeels, cxLookAndFeelPainters,
+  Menus, dxSkinsCore, dxSkinsDefaultPainters, Vcl.StdCtrls, cxButtons;
+
+type
+  TfrmCadSMS = class(TfrmPadrao)
+    GroupBox1: TGroupBox;
+    btnFechar: TcxButton;
+    btnSalvar: TcxButton;
+    Label1: TLabel;
+    EdtChave: TEdit;
+    procedure btnFecharClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadSMS: TfrmCadSMS;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmCadSMS.btnFecharClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+end.

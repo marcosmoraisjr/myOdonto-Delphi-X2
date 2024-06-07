@@ -1,0 +1,28 @@
+unit F_PainelPadrao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.StdCtrls, Data.DB,
+  Data.Win.ADODB;
+
+type
+  TfrmPainelPadrao = class(TForm)
+    GroupBox1: TGroupBox;
+    btnImprimir: TSpeedButton;
+    qryAux: TADOQuery;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPainelPadrao: TfrmPainelPadrao;
+
+implementation
+
+{$R *.dfm}
+
+end.

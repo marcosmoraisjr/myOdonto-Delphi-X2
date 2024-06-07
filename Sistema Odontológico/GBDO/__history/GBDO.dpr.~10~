@@ -1,0 +1,37 @@
+program GBDO;
+
+uses
+  Windows,
+  Dialogs,
+  Vcl.Forms,
+  Main in 'pas\Main.pas' {frmMain};
+
+{$R *.res}
+var
+  iTipo : Integer;
+begin
+
+  if ParamStr(1) = 'ANEXAR' then
+    Begin
+      iTipo := 0;
+    End
+  Else if ParamStr(1) = 'BACKUP' then
+    Begin
+      iTipo := 1;
+    End
+  Else if ParamStr(1) = 'RESTAURAR' then
+    Begin
+      iTipo := 2;
+    End
+  Else
+    Begin
+      ShowMessage('o GBDO só pode ser executado através do Sistema Odontosis');
+      Halt;
+    End;
+
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmMain, frmMain);
+  frmMain.MontaForm(iTipo);
+  Application.Run;
+end.

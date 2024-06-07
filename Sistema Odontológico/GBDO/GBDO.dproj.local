@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/04/08 19:40:07.000.996,=C:\Users\Alessandro\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013/04/08 20:06:12.000.954,D:\Projetos\Google Drive\Sistemas\GBDO\Main.pas=C:\Users\Alessandro\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013/04/08 20:06:12.000.954,D:\Projetos\Google Drive\Sistemas\GBDO\Main.dfm=C:\Users\Alessandro\Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2013/04/08 20:06:20.000.894,D:\Projetos\Google Drive\Sistemas\GBDO\GBDO.dproj=C:\Users\Alessandro\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2013/04/08 20:06:47.000.980,D:\Projetos\Google Drive\Sistemas\GBDO\Main.pas=</Transaction>
+    <Transaction>2013/04/08 20:06:52.000.639,=D:\Projetos\Google Drive\Sistemas\GBDO\Unit1.pas</Transaction>
+    <Transaction>2013/04/08 20:07:34.000.729,D:\Projetos\Google Drive\Sistemas\GBDO\pas\Main.pas=D:\Projetos\Google Drive\Sistemas\GBDO\Unit1.pas</Transaction>
+    <Transaction>2013/04/08 20:07:34.000.729,D:\Projetos\Google Drive\Sistemas\GBDO\pas\Main.dfm=D:\Projetos\Google Drive\Sistemas\GBDO\Unit1.dfm</Transaction>
+    <Transaction>2013/04/08 20:27:16.000.260,=D:\Projetos\Google Drive\Sistemas\GBDO\pas\Funcoes.pas</Transaction>
+    <Transaction>2013/04/08 20:27:16.000.285,=D:\Projetos\Google Drive\Sistemas\GBDO\pas\Mensagem.pas</Transaction>
+    <Transaction>2013/04/08 20:27:16.000.914,=D:\Projetos\Google Drive\Sistemas\GBDO\pas\Padrao.pas</Transaction>
+    <Transaction>2013/04/08 20:27:17.000.031,=D:\Projetos\Google Drive\Sistemas\GBDO\pas\uDM.pas</Transaction>
+  </Transactions>
+</BorlandProject>
